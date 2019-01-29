@@ -28,6 +28,7 @@ class Pagination {
 		$num_links = $this->num_links;
 		$num_pages = ceil($total / $limit);
 
+		$this->url = str_replace('%7Bpage%7D', '{page}', $this->url);
 		$first_page_href = str_replace(array('&amp;page={page}', '?page={page}', 'page={page}',), '', $this->url);
 
 		$output = '<ul class="pagination">';
