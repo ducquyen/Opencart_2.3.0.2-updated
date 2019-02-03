@@ -2,6 +2,7 @@
 $_['heading_title']    = 'Google reCAPTCHA';
 
 // Text
+$_['text_extension']   = 'Extensions';
 $_['text_captcha']     = 'Captcha';
 $_['text_success']	   = 'Success: You have modified Google reCAPTCHA!';
 $_['text_edit']        = 'Edit Google reCAPTCHA';
