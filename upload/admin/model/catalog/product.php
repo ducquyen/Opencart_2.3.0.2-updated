@@ -344,22 +344,22 @@ class ModelCatalogProduct extends Model {
 		$sql = "SELECT * FROM " . DB_PREFIX . "product p LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id) WHERE pd.language_id = '" . (int)$this->config->get('config_language_id') . "'";
 
 		if (!empty($data['filter_name'])) {
-			$sql .= " AND pd.name LIKE '%" . $this->db->escape($data['filter_name']) . "%'";
+			$sql .= " AND pd.name LIKE '" . $this->db->escape((string)$data['filter_name']) . "%'";
 		}
 
 		if (!empty($data['filter_model'])) {
-			$sql .= " AND p.model LIKE '%" . $this->db->escape($data['filter_model']) . "%'";
+			$sql .= " AND p.model LIKE '" . $this->db->escape((string)$data['filter_model']) . "%'";
 		}
 
-		if (isset($data['filter_price']) && !is_null($data['filter_price'])) {
-			$sql .= " AND p.price LIKE '" . $this->db->escape($data['filter_price']) . "%'";
+		if (!empty($data['filter_price'])) {
+			$sql .= " AND p.price LIKE '" . $this->db->escape((string)$data['filter_price']) . "%'";
 		}
 
-		if (isset($data['filter_quantity']) && !is_null($data['filter_quantity'])) {
+		if (isset($data['filter_quantity']) && $data['filter_quantity'] !== '') {
 			$sql .= " AND p.quantity = '" . (int)$data['filter_quantity'] . "'";
 		}
 
-		if (isset($data['filter_status']) && !is_null($data['filter_status'])) {
+		if (isset($data['filter_status']) && $data['filter_status'] !== '') {
 			$sql .= " AND p.status = '" . (int)$data['filter_status'] . "'";
 		}
 
