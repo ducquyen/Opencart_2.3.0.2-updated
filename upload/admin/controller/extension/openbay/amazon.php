@@ -791,7 +791,7 @@ class ControllerExtensionOpenbayAmazon extends Controller {
 			);
 
 			if (!empty($this->request->get['page'])) {
-				$page = $this->request->get['page'];
+				$page = (int)$this->request->get['page'];
 			} else {
 				$page = 1;
 			}

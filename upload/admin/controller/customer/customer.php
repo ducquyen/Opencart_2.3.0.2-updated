@@ -378,7 +378,7 @@ class ControllerCustomerCustomer extends Controller {
 		}
 
 		if (isset($this->request->get['page'])) {
-			$page = $this->request->get['page'];
+			$page = (int)$this->request->get['page'];
 		} else {
 			$page = 1;
 		}
@@ -1212,7 +1212,7 @@ class ControllerCustomerCustomer extends Controller {
 		$data['column_comment'] = $this->language->get('column_comment');
 
 		if (isset($this->request->get['page'])) {
-			$page = $this->request->get['page'];
+			$page = (int)$this->request->get['page'];
 		} else {
 			$page = 1;
 		}
@@ -1275,7 +1275,7 @@ class ControllerCustomerCustomer extends Controller {
 		$data['column_amount'] = $this->language->get('column_amount');
 
 		if (isset($this->request->get['page'])) {
-			$page = $this->request->get['page'];
+			$page = (int)$this->request->get['page'];
 		} else {
 			$page = 1;
 		}
@@ -1341,7 +1341,7 @@ class ControllerCustomerCustomer extends Controller {
 		$data['column_points'] = $this->language->get('column_points');
 
 		if (isset($this->request->get['page'])) {
-			$page = $this->request->get['page'];
+			$page = (int)$this->request->get['page'];
 		} else {
 			$page = 1;
 		}
@@ -1406,7 +1406,7 @@ class ControllerCustomerCustomer extends Controller {
 		$data['column_date_added'] = $this->language->get('column_date_added');
 
 		if (isset($this->request->get['page'])) {
-			$page = $this->request->get['page'];
+			$page = (int)$this->request->get['page'];
 		} else {
 			$page = 1;
 		}
