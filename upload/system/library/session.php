@@ -47,7 +47,7 @@ class Session {
 		$this->data = &$_SESSION[$this->session_id];
 		
 		if ($key != 'PHPSESSID') {
-			setcookie($key, $this->session_id, ['expires' => ini_get('session.cookie_lifetime'), 'path' => ini_get('session.cookie_path'), 'domain' => ini_get('session.cookie_domain'), 'samesite' => 'None', 'secure' => true, 'httponly' => ini_get('session.cookie_httponly')]);
+			setcookie($key, $this->session_id, ini_get('session.cookie_lifetime'), ini_get('session.cookie_path'), ini_get('session.cookie_domain'), ini_get('session.cookie_secure'), ini_get('session.cookie_httponly'));
 		}
 		
 		return $this->session_id;
@@ -74,6 +74,6 @@ class Session {
 			unset($_SESSION[$key]);
 		}
 		
-		setcookie($key, '', ['expires' => time() - 42000, 'path' => ini_get('session.cookie_path'), 'domain' => ini_get('session.cookie_domain'), 'samesite' => 'None', 'secure' => true]);
+		setcookie($key, '', time() - 42000, ini_get('session.cookie_path'), ini_get('session.cookie_domain'));
 	}
 }
