@@ -653,7 +653,6 @@ class ControllerCatalogProduct extends Controller {
 		$data['tab_links'] = $this->language->get('tab_links');
 		$data['tab_reward'] = $this->language->get('tab_reward');
 		$data['tab_design'] = $this->language->get('tab_design');
-		$data['tab_openbay'] = $this->language->get('tab_openbay');
 
 		if (isset($this->error['warning'])) {
 			$data['error_warning'] = $this->error['warning'];
@@ -1362,7 +1361,7 @@ class ControllerCatalogProduct extends Controller {
 	protected function validateDelete() {
 		if (!$this->user->hasPermission('modify', 'catalog/product')) {
 			$this->error['warning'] = $this->language->get('error_permission');
-.		}
+		}
 
 		return !$this->error;
 	}
