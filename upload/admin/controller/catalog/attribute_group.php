@@ -326,7 +326,7 @@ class ControllerCatalogAttributeGroup extends Controller {
 
 		if (isset($this->request->post['attribute_group_description'])) {
 			$data['attribute_group_description'] = $this->request->post['attribute_group_description'];
-		} elseif (isset($this->request->get['attribute_group_id'])) {
+		} elseif (!empty($attribute_group_info)) {
 			$data['attribute_group_description'] = $this->model_catalog_attribute_group->getAttributeGroupDescriptions($this->request->get['attribute_group_id']);
 		} else {
 			$data['attribute_group_description'] = array();
@@ -353,7 +353,7 @@ class ControllerCatalogAttributeGroup extends Controller {
 		}
 
 		foreach ($this->request->post['attribute_group_description'] as $language_id => $value) {
-			if ((utf8_strlen($value['name']) < 3) || (utf8_strlen($value['name']) > 64)) {
+			if ((utf8_strlen(trim($value['name'])) < 3) || (utf8_strlen($value['name']) > 64)) {
 				$this->error['name'][$language_id] = $this->language->get('error_name');
 			}
 		}

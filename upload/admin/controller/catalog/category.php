@@ -407,7 +407,7 @@ class ControllerCatalogCategory extends Controller {
 
 		if (isset($this->request->post['category_description'])) {
 			$data['category_description'] = $this->request->post['category_description'];
-		} elseif (isset($this->request->get['category_id'])) {
+		} elseif (!empty($category_info)) {
 			$data['category_description'] = $this->model_catalog_category->getCategoryDescriptions($this->request->get['category_id']);
 		} else {
 			$data['category_description'] = array();
@@ -433,7 +433,7 @@ class ControllerCatalogCategory extends Controller {
 
 		if (isset($this->request->post['category_filter'])) {
 			$filters = $this->request->post['category_filter'];
-		} elseif (isset($this->request->get['category_id'])) {
+		} elseif (!empty($category_info)) {
 			$filters = $this->model_catalog_category->getCategoryFilters($this->request->get['category_id']);
 		} else {
 			$filters = array();
@@ -458,7 +458,7 @@ class ControllerCatalogCategory extends Controller {
 
 		if (isset($this->request->post['category_store'])) {
 			$data['category_store'] = $this->request->post['category_store'];
-		} elseif (isset($this->request->get['category_id'])) {
+		} elseif (!empty($category_info)) {
 			$data['category_store'] = $this->model_catalog_category->getCategoryStores($this->request->get['category_id']);
 		} else {
 			$data['category_store'] = array(0);
@@ -482,15 +482,13 @@ class ControllerCatalogCategory extends Controller {
 
 		$this->load->model('tool/image');
 
-		if (isset($this->request->post['image']) && is_file(DIR_IMAGE . $this->request->post['image'])) {
-			$data['thumb'] = $this->model_tool_image->resize($this->request->post['image'], 100, 100);
-		} elseif (!empty($category_info) && is_file(DIR_IMAGE . $category_info['image'])) {
-			$data['thumb'] = $this->model_tool_image->resize($category_info['image'], 100, 100);
-		} else {
-			$data['thumb'] = $this->model_tool_image->resize('no_image.png', 100, 100);
-		}
-
 		$data['placeholder'] = $this->model_tool_image->resize('no_image.png', 100, 100);
+
+		if (is_file(DIR_IMAGE . html_entity_decode($data['image'], ENT_QUOTES, 'UTF-8'))) {
+			$data['thumb'] = $this->model_tool_image->resize(html_entity_decode($data['image'], ENT_QUOTES, 'UTF-8'), 100, 100);
+		} else {
+			$data['thumb'] = $data['placeholder'];
+		}
 
 		if (isset($this->request->post['top'])) {
 			$data['top'] = $this->request->post['top'];
@@ -526,7 +524,7 @@ class ControllerCatalogCategory extends Controller {
 
 		if (isset($this->request->post['category_layout'])) {
 			$data['category_layout'] = $this->request->post['category_layout'];
-		} elseif (isset($this->request->get['category_id'])) {
+		} elseif (!empty($category_info)) {
 			$data['category_layout'] = $this->model_catalog_category->getCategoryLayouts($this->request->get['category_id']);
 		} else {
 			$data['category_layout'] = array();
@@ -549,11 +547,11 @@ class ControllerCatalogCategory extends Controller {
 		}
 
 		foreach ($this->request->post['category_description'] as $language_id => $value) {
-			if ((utf8_strlen($value['name']) < 2) || (utf8_strlen($value['name']) > 255)) {
+			if ((utf8_strlen(trim($value['name'])) < 2) || (utf8_strlen($value['name']) > 255)) {
 				$this->error['name'][$language_id] = $this->language->get('error_name');
 			}
 
-			if ((utf8_strlen($value['meta_title']) < 3) || (utf8_strlen($value['meta_title']) > 255)) {
+			if ((utf8_strlen(trim($value['meta_title'])) < 3) || (utf8_strlen($value['meta_title']) > 255)) {
 				$this->error['meta_title'][$language_id] = $this->language->get('error_meta_title');
 			}
 		}

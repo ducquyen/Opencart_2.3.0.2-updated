@@ -353,7 +353,7 @@ class ControllerCatalogManufacturer extends Controller {
 
 		if (isset($this->request->post['manufacturer_store'])) {
 			$data['manufacturer_store'] = $this->request->post['manufacturer_store'];
-		} elseif (isset($this->request->get['manufacturer_id'])) {
+		} elseif (!empty($manufacturer_info)) {
 			$data['manufacturer_store'] = $this->model_catalog_manufacturer->getManufacturerStores($this->request->get['manufacturer_id']);
 		} else {
 			$data['manufacturer_store'] = array(0);
@@ -377,15 +377,13 @@ class ControllerCatalogManufacturer extends Controller {
 
 		$this->load->model('tool/image');
 
-		if (isset($this->request->post['image']) && is_file(DIR_IMAGE . $this->request->post['image'])) {
-			$data['thumb'] = $this->model_tool_image->resize($this->request->post['image'], 100, 100);
-		} elseif (!empty($manufacturer_info) && is_file(DIR_IMAGE . $manufacturer_info['image'])) {
-			$data['thumb'] = $this->model_tool_image->resize($manufacturer_info['image'], 100, 100);
-		} else {
-			$data['thumb'] = $this->model_tool_image->resize('no_image.png', 100, 100);
-		}
-
 		$data['placeholder'] = $this->model_tool_image->resize('no_image.png', 100, 100);
+
+		if (is_file(DIR_IMAGE . html_entity_decode($data['image'], ENT_QUOTES, 'UTF-8'))) {
+			$data['thumb'] = $this->model_tool_image->resize(html_entity_decode($data['image'], ENT_QUOTES, 'UTF-8'), 100, 100);
+		} else {
+			$data['thumb'] = $data['placeholder'];
+		}
 
 		if (isset($this->request->post['sort_order'])) {
 			$data['sort_order'] = $this->request->post['sort_order'];
@@ -407,7 +405,7 @@ class ControllerCatalogManufacturer extends Controller {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
 
-		if ((utf8_strlen($this->request->post['name']) < 2) || (utf8_strlen($this->request->post['name']) > 64)) {
+		if ((utf8_strlen(trim($this->request->post['name'])) < 2) || (utf8_strlen($this->request->post['name']) > 64)) {
 			$this->error['name'] = $this->language->get('error_name');
 		}
 

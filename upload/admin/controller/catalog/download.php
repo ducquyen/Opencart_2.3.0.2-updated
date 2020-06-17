@@ -345,14 +345,14 @@ class ControllerCatalogDownload extends Controller {
 		$data['token'] = $this->session->data['token'];
 
 		if (isset($this->request->get['download_id'])) {
-			$data['download_id'] = $this->request->get['download_id'];
+			$data['download_id'] = (int)$this->request->get['download_id'];
 		} else {
 			$data['download_id'] = 0;
 		}
 
 		if (isset($this->request->post['download_description'])) {
 			$data['download_description'] = $this->request->post['download_description'];
-		} elseif (isset($this->request->get['download_id'])) {
+		} elseif (!empty($download_info)) {
 			$data['download_description'] = $this->model_catalog_download->getDownloadDescriptions($this->request->get['download_id']);
 		} else {
 			$data['download_description'] = array();
@@ -387,12 +387,12 @@ class ControllerCatalogDownload extends Controller {
 		}
 
 		foreach ($this->request->post['download_description'] as $language_id => $value) {
-			if ((utf8_strlen($value['name']) < 3) || (utf8_strlen($value['name']) > 64)) {
+			if ((utf8_strlen(trim($value['name'])) < 3) || (utf8_strlen($value['name']) > 64)) {
 				$this->error['name'][$language_id] = $this->language->get('error_name');
 			}
 		}
 
-		if ((utf8_strlen($this->request->post['filename']) < 3) || (utf8_strlen($this->request->post['filename']) > 128)) {
+		if ((utf8_strlen(trim($this->request->post['filename'])) < 3) || (utf8_strlen($this->request->post['filename']) > 128)) {
 			$this->error['filename'] = $this->language->get('error_filename');
 		}
 
@@ -400,7 +400,7 @@ class ControllerCatalogDownload extends Controller {
 			$this->error['filename'] = $this->language->get('error_exists');
 		}
 
-		if ((utf8_strlen($this->request->post['mask']) < 3) || (utf8_strlen($this->request->post['mask']) > 128)) {
+		if ((utf8_strlen(trim($this->request->post['mask'])) < 3) || (utf8_strlen($this->request->post['mask']) > 128)) {
 			$this->error['mask'] = $this->language->get('error_mask');
 		}
 
