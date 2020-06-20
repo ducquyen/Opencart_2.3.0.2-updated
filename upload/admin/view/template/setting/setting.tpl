@@ -213,6 +213,20 @@
                 </div>
               </div>
               <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-timezone"><?php echo $entry_timezone; ?></label>
+                <div class="col-sm-10">
+                  <select name="config_timezone" id="input-timezone" class="form-control">
+                    <?php foreach ($timezones as $timezone) { ?>
+                      <?php if ($timezone['value'] == $config_timezone) { ?>
+                        <option value="<?php echo $timezone['value']; ?>" selected="selected"><?php echo $timezone['text']; ?></option>
+                      <?php } else { ?>
+                        <option value="<?php echo $timezone['value']; ?>"><?php echo $timezone['text']; ?></option>
+                      <?php } ?>
+                    <?php } ?>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
                 <label class="col-sm-2 control-label" for="input-language"><?php echo $entry_language; ?></label>
                 <div class="col-sm-10">
                   <select name="config_language" id="input-language" class="form-control">
@@ -249,6 +263,20 @@
                     <option value="<?php echo $currency['code']; ?>" selected="selected"><?php echo $currency['title']; ?></option>
                     <?php } else { ?>
                     <option value="<?php echo $currency['code']; ?>"><?php echo $currency['title']; ?></option>
+                    <?php } ?>
+                    <?php } ?>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-currency-engine"><?php echo $entry_currency_engine; ?></label>
+                <div class="col-sm-10">
+                  <select name="config_currency_engine" id="input-currency-engine" class="form-control">
+                    <?php foreach ($currency_engines as $currency_engine) { ?>
+                    <?php if ($currency_engine['value'] == $config_currency_engine) { ?>
+                    <option value="<?php echo $currency_engine['value']; ?>" selected="selected"><?php echo $currency_engine['text']; ?></option>
+                    <?php } else { ?>
+                    <option value="<?php echo $currency_engine['value']; ?>"><?php echo $currency_engine['text']; ?></option>
                     <?php } ?>
                     <?php } ?>
                   </select>

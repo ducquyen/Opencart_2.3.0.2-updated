@@ -12,12 +12,6 @@ class ControllerSettingSetting extends Controller {
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 			$this->model_setting_setting->editSetting('config', $this->request->post);
 
-			if ($this->config->get('config_currency_auto')) {
-				$this->load->model('localisation/currency');
-
-				$this->model_localisation_currency->refresh();
-			}
-
 			$this->session->data['success'] = $this->language->get('text_success');
 
 			$this->response->redirect($this->url->link('setting/store', 'token=' . $this->session->data['token'], true));
@@ -75,9 +69,11 @@ class ControllerSettingSetting extends Controller {
 		$data['entry_layout'] = $this->language->get('entry_layout');
 		$data['entry_country'] = $this->language->get('entry_country');
 		$data['entry_zone'] = $this->language->get('entry_zone');
+		$data['entry_timezone'] = $this->language->get('entry_timezone');
 		$data['entry_language'] = $this->language->get('entry_language');
 		$data['entry_admin_language'] = $this->language->get('entry_admin_language');
 		$data['entry_currency'] = $this->language->get('entry_currency');
+		$data['entry_currency_engine'] = $this->language->get('entry_currency_engine');
 		$data['entry_currency_auto'] = $this->language->get('entry_currency_auto');
 		$data['entry_length_class'] = $this->language->get('entry_length_class');
 		$data['entry_weight_class'] = $this->language->get('entry_weight_class');
@@ -543,6 +539,34 @@ class ControllerSettingSetting extends Controller {
 			$data['config_zone_id'] = $this->config->get('config_zone_id');
 		}
 
+		if (isset($this->request->post['config_timezone'])) {
+			$data['config_timezone'] = $this->request->post['config_timezone'];
+		} elseif ($this->config->has('config_timezone')) {
+			$data['config_timezone'] = $this->config->get('config_timezone');
+		} else {
+			$data['config_timezone'] = 'UTC';
+		}
+
+		// Set Time Zone
+		$data['timezones'] = array();
+
+		$timestamp = time();
+
+		$timezones = timezone_identifiers_list();
+		
+		foreach($timezones as $timezone) {
+			date_default_timezone_set($timezone);
+
+			$hour = ' (' . date('P', $timestamp) . ')';
+
+			$data['timezones'][] = array(
+				'text'  => $timezone . $hour,
+				'value' => $timezone
+			);
+		}
+
+		date_default_timezone_set($this->config->get('config_timezone'));
+
 		if (isset($this->request->post['config_language'])) {
 			$data['config_language'] = $this->request->post['config_language'];
 		} else {
@@ -563,6 +587,29 @@ class ControllerSettingSetting extends Controller {
 			$data['config_currency'] = $this->request->post['config_currency'];
 		} else {
 			$data['config_currency'] = $this->config->get('config_currency');
+		}
+
+		$data['currency_engines'] = array();
+
+		$this->load->model('extension/extension');
+
+		$extensions = $this->model_extension_extension->getInstalled('currency');
+
+		foreach ($extensions as $code) {
+			if ($this->config->get($code . '_status')) {
+				$this->load->language('extension/currency/' . $code);
+
+				$data['currency_engines'][] = array(
+					'text'  => $this->language->get('heading_title'),
+					'value' => $code
+				);
+			}
+		}
+
+		if (isset($this->request->post['config_currency_engine'])) {
+			$data['config_currency_engine'] = $this->request->post['config_currency_engine'];
+		} else {
+			$data['config_currency_engine'] = $this->config->get('config_currency_engine');
 		}
 
 		if (isset($this->request->post['config_currency_auto'])) {
