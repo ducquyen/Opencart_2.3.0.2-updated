@@ -138,11 +138,21 @@
       <legend><?php echo $text_your_password; ?></legend>
       <div class="form-group required">
         <label class="control-label" for="input-payment-password"><?php echo $entry_password; ?></label>
-        <input type="password" name="password" value="" placeholder="<?php echo $entry_password; ?>" id="input-payment-password" class="form-control" />
+        <div class="input-group">
+          <input type="password" name="password" value="" placeholder="<?php echo $entry_password; ?>" id="input-payment-password" class="form-control" />
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button" onclick="$('#input-payment-password').attr('type') === 'password' ? $('#input-payment-password').attr('type', 'text') : $('#input-payment-password').attr('type', 'password'); $('#toggle-payment-password').toggleClass('fa-eye fa-eye-slash');"><i id="toggle-payment-password" class="fa fa-eye-slash"></i></button>
+          </span>
+        </div>
       </div>
       <div class="form-group required">
         <label class="control-label" for="input-payment-confirm"><?php echo $entry_confirm; ?></label>
-        <input type="password" name="confirm" value="" placeholder="<?php echo $entry_confirm; ?>" id="input-payment-confirm" class="form-control" />
+        <div class="input-group">
+          <input type="password" name="confirm" value="" placeholder="<?php echo $entry_confirm; ?>" id="input-payment-confirm" class="form-control" />
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button" onclick="$('#input-payment-confirm').attr('type') === 'password' ? $('#input-payment-confirm').attr('type', 'text') : $('#input-payment-confirm').attr('type', 'password'); $('#toggle-payment-confirm').toggleClass('fa-eye fa-eye-slash');"><i id="toggle-payment-confirm" class="fa fa-eye-slash"></i></button>
+          </span>
+        </div>
       </div>
     </fieldset>
   </div>

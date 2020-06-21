@@ -30,6 +30,9 @@
                 <label for="input-password"><?php echo $entry_password; ?></label>
                 <div class="input-group"><span class="input-group-addon"><i class="fa fa-lock"></i></span>
                   <input type="password" name="password" value="<?php echo $password; ?>" placeholder="<?php echo $entry_password; ?>" id="input-password" class="form-control" />
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" onclick="$('#input-password').attr('type') === 'password' ? $('#input-password').attr('type', 'text') : $('#input-password').attr('type', 'password'); $('#toggle-password').toggleClass('fa-eye fa-eye-slash');"><i id="toggle-password" class="fa fa-eye-slash"></i></button>
+                  </span>
                 </div>
                 <?php if ($forgotten) { ?>
                 <span class="help-block"><a href="<?php echo $forgotten; ?>"><?php echo $text_forgotten; ?></a></span>

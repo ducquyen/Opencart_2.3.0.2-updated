@@ -39,7 +39,12 @@
               </div>
               <div class="form-group">
                 <label class="control-label" for="input-password"><?php echo $entry_password; ?></label>
-                <input type="password" name="password" value="<?php echo $password; ?>" placeholder="<?php echo $entry_password; ?>" id="input-password" class="form-control" />
+                <div class="input-group">
+                  <input type="password" name="password" value="<?php echo $password; ?>" placeholder="<?php echo $entry_password; ?>" id="input-password" class="form-control" />
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" onclick="$('#input-password').attr('type') === 'password' ? $('#input-password').attr('type', 'text') : $('#input-password').attr('type', 'password'); $('#toggle-password').toggleClass('fa-eye fa-eye-slash');"><i id="toggle-password" class="fa fa-eye-slash"></i></button>
+                  </span>
+                </div>
                 <a href="<?php echo $forgotten; ?>"><?php echo $text_forgotten; ?></a></div>
               <input type="submit" value="<?php echo $button_login; ?>" class="btn btn-primary" />
               <?php if ($redirect) { ?>

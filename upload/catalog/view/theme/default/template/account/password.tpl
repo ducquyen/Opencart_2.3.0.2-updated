@@ -21,7 +21,12 @@
           <div class="form-group required">
             <label class="col-sm-2 control-label" for="input-password"><?php echo $entry_password; ?></label>
             <div class="col-sm-10">
-              <input type="password" name="password" value="<?php echo $password; ?>" placeholder="<?php echo $entry_password; ?>" id="input-password" class="form-control" />
+              <div class="input-group">
+                <input type="password" name="password" value="<?php echo $password; ?>" placeholder="<?php echo $entry_password; ?>" id="input-password" class="form-control" />
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="button" onclick="$('#input-password').attr('type') === 'password' ? $('#input-password').attr('type', 'text') : $('#input-password').attr('type', 'password'); $('#toggle-password').toggleClass('fa-eye fa-eye-slash');"><i id="toggle-password" class="fa fa-eye-slash"></i></button>
+                </span>
+              </div>
               <?php if ($error_password) { ?>
               <div class="text-danger"><?php echo $error_password; ?></div>
               <?php } ?>
@@ -30,7 +35,12 @@
           <div class="form-group required">
             <label class="col-sm-2 control-label" for="input-confirm"><?php echo $entry_confirm; ?></label>
             <div class="col-sm-10">
-              <input type="password" name="confirm" value="<?php echo $confirm; ?>" placeholder="<?php echo $entry_confirm; ?>" id="input-confirm" class="form-control" />
+              <div class="input-group">
+                <input type="password" name="confirm" value="<?php echo $confirm; ?>" placeholder="<?php echo $entry_confirm; ?>" id="input-confirm" class="form-control" />
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="button" onclick="$('#input-confirm').attr('type') === 'password' ? $('#input-confirm').attr('type', 'text') : $('#input-confirm').attr('type', 'password'); $('#toggle-confirm').toggleClass('fa-eye fa-eye-slash');"><i id="toggle-confirm" class="fa fa-eye-slash"></i></button>
+                </span>
+              </div>
               <?php if ($error_confirm) { ?>
               <div class="text-danger"><?php echo $error_confirm; ?></div>
               <?php } ?>
