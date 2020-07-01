@@ -28,6 +28,7 @@ $_['entry_type']        = 'Type';
 $_['help_keyword']      = 'Do not use spaces, instead replace spaces with - and make sure the SEO URL is globally unique.';
 
 // Error
+$_['error_warning']     = 'Warning: Please check the form carefully for errors!';
 $_['error_permission']  = 'Warning: You do not have permission to modify manufacturers!';
 $_['error_name']        = 'Manufacturer Name must be between 2 and 64 characters!';
 $_['error_keyword']     = 'SEO URL already in use!';
