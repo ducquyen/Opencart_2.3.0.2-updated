@@ -297,11 +297,17 @@ class ControllerCheckoutCart extends Controller {
 		$product_info = $this->model_catalog_product->getProduct($product_id);
 
 		if ($product_info) {
-			if (isset($this->request->post['quantity']) && ((int)$this->request->post['quantity'] >= $product_info['minimum'])) {
-				$quantity = (int)$this->request->post['quantity'];
-			} else {
-				$quantity = $product_info['minimum'] ? $product_info['minimum'] : 1;
-			}
+				if(is_numeric($this->request->post['quantity'])){
+					$quantity = round($this->request->post['quantity']);
+
+					if($quantity < 1){
+						// Post Error Message when it is not bigger than 1
+						$json['error']['quantity'] = $this->language->get('error_quantity_required_zero');
+					}
+				} else {
+					// Post Error Message when it is not text
+					$json['error']['quantity'] = $this->language->get('error_quantity_required');
+				}
 
 			if (isset($this->request->post['option'])) {
 				$option = array_filter($this->request->post['option']);
