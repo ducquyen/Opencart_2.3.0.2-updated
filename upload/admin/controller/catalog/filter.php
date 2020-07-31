@@ -262,7 +262,7 @@ class ControllerCatalogFilter extends Controller {
 	protected function getForm() {
 		$data['heading_title'] = $this->language->get('heading_title');
 
-		$data['text_form'] = !isset($this->request->get['filter_id']) ? $this->language->get('text_add') : $this->language->get('text_edit');
+		$data['text_form'] = !isset($this->request->get['filter_group_id']) ? $this->language->get('text_add') : $this->language->get('text_edit');
 
 		$data['entry_group'] = $this->language->get('entry_group');
 		$data['entry_name'] = $this->language->get('entry_name');
@@ -378,10 +378,10 @@ class ControllerCatalogFilter extends Controller {
 		}
 
 		if (isset($this->request->post['filter'])) {
-			foreach ($this->request->post['filter'] as $filter_id => $filter) {
+			foreach ($this->request->post['filter'] as $key => $filter) {
 				foreach ($filter['filter_description'] as $language_id => $filter_description) {
 					if ((utf8_strlen(trim($filter_description['name'])) < 1) || (utf8_strlen($filter_description['name']) > 64)) {
-						$this->error['filter'][$filter_id][$language_id] = $this->language->get('error_name');
+						$this->error['filter'][$key][$language_id] = $this->language->get('error_name');
 					}
 				}
 			}
