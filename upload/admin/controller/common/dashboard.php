@@ -22,7 +22,7 @@ class ControllerCommonDashboard extends Controller {
 		$data['token'] = $this->session->data['token'];
 
 		// Check install directory exists
-		if (is_dir(DIR_APPLICATION . 'install')) {
+		if (is_dir(dirname(DIR_APPLICATION) . '/install')) {
 			$data['error_install'] = $this->language->get('error_install');
 		} else {
 			$data['error_install'] = '';
