@@ -19,8 +19,10 @@ class ControllerCommonDashboard extends Controller {
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
 		);
 
+		$data['token'] = $this->session->data['token'];
+
 		// Check install directory exists
-		if (is_dir(dirname(DIR_APPLICATION) . '/install')) {
+		if (is_dir(DIR_APPLICATION . 'install')) {
 			$data['error_install'] = $this->language->get('error_install');
 		} else {
 			$data['error_install'] = '';
@@ -75,6 +77,8 @@ class ControllerCommonDashboard extends Controller {
 				$column = array();
 			}
 		}
+
+		$data['rows'][] = $column;
 
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');

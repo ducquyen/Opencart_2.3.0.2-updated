@@ -385,6 +385,8 @@ class ControllerCatalogFilter extends Controller {
 					}
 				}
 			}
+		} else {
+			$this->error['warning']  = $this->language->get('error_values');
 		}
 
 		if ($this->error && !isset($this->error['warning'])) {
