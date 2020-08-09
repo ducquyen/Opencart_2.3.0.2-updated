@@ -1458,7 +1458,7 @@ INSERT INTO `oc_extension` (`extension_id`, `type`, `code`) VALUES
 (26, 'dashboard', 'map'),
 (27, 'dashboard', 'customer'),
 (28, 'dashboard', 'chart'),
-(29, 'currency', 'fixer');
+(29, 'currency', 'ecb');
 
 -- --------------------------------------------------------
 
@@ -3170,7 +3170,7 @@ INSERT INTO `oc_setting` (`store_id`, `code`, `key`, `value`, `serialized`) VALU
 (0, 'config', 'config_admin_language', 'en-gb', 0),
 (0, 'config', 'config_currency', 'USD', 0),
 (0, 'config', 'config_currency_auto', '1', 0),
-(0, 'config', 'config_currency_engine', 'fixer', 0),
+(0, 'config', 'config_currency_engine', 'ecb', 0),
 (0, 'config', 'config_length_class_id', '1', 0),
 (0, 'config', 'config_weight_class_id', '1', 0),
 (0, 'config', 'config_product_count', '1', 0),
@@ -3240,7 +3240,7 @@ INSERT INTO `oc_setting` (`store_id`, `code`, `key`, `value`, `serialized`) VALU
 (0, 'config', 'config_mail_alert', '["order"]', 1),
 (0, 'config', 'config_captcha', 'basic_captcha', 0),
 (0, 'config', 'config_captcha_page', '["review","return","contact"]', 1),
-(0, 'fixer', 'fixer_status', '1', 0),
+(0, 'ecb', 'ecb_status', '1', 0),
 (0, 'config', 'config_login_attempts', '5', 0),
 (0, 'free_checkout', 'free_checkout_status', '1', 0),
 (0, 'free_checkout', 'free_checkout_order_status_id', '1', 0),
