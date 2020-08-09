@@ -10,4 +10,5 @@ OpenCart is a free open source ecommerce platform for online merchants. OpenCart
 - Support PHP 7.0 and above
 - OpenBay was removed
 - Integrated Currency module from Master Branch - 3.1.0.0b
+- Integrated Timezone from Master Branch - 3.1.0.0b
 - Added Show/Hide password. Code used from <a href="https://github.com/opencartbrasil/opencartbrasil">Opencart Brasil</a>
