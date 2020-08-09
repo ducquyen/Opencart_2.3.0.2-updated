@@ -55,7 +55,7 @@ class File extends \SessionHandler {
 		$file = session_save_path() . '/sess_' . $session_id;
 		
 		if (is_file($file)) {
-			unset($file);
+			unlink($file);
 		}
     }
 
