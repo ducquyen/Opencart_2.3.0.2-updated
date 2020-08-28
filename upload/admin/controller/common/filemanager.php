@@ -3,24 +3,17 @@ class ControllerCommonFileManager extends Controller {
 	public function index() {
 		$this->load->language('common/filemanager');
 
-		// Find which protocol to use to pass the full image link back
-		if ($this->request->server['HTTPS']) {
-			$server = HTTPS_CATALOG;
+		// Make sure we have the correct directory
+		if (isset($this->request->get['directory'])) {
+			$directory = rtrim(DIR_IMAGE . 'catalog/' . str_replace('*', '', $this->request->get['directory']), '/');
 		} else {
-			$server = HTTP_CATALOG;
+			$directory = DIR_IMAGE . 'catalog';
 		}
 
 		if (isset($this->request->get['filter_name'])) {
 			$filter_name = rtrim(str_replace('*', '', $this->request->get['filter_name']), '/');
 		} else {
 			$filter_name = null;
-		}
-
-		// Make sure we have the correct directory
-		if (isset($this->request->get['directory'])) {
-			$directory = rtrim(DIR_IMAGE . 'catalog/' . str_replace('*', '', $this->request->get['directory']), '/');
-		} else {
-			$directory = DIR_IMAGE . 'catalog';
 		}
 
 		if (isset($this->request->get['page'])) {
@@ -88,7 +81,7 @@ class ControllerCommonFileManager extends Controller {
 					'name'  => implode(' ', $name),
 					'type'  => 'image',
 					'path'  => utf8_substr($image, utf8_strlen(DIR_IMAGE)),
-					'href'  => $server . 'image/' . utf8_substr($image, utf8_strlen(DIR_IMAGE))
+					'href'  => HTTP_CATALOG . 'image/' . utf8_substr($image, utf8_strlen(DIR_IMAGE))
 				);
 			}
 		}
