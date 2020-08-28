@@ -1,7 +1,6 @@
 <?php
 // Site
-$_['site_base']            = '';
-$_['site_ssl']             = false;
+$_['site_url']             = '';
 
 // Url
 $_['url_autostart']        = true;
@@ -10,9 +9,12 @@ $_['url_autostart']        = true;
 $_['language_default']     = 'en-gb';
 $_['language_autoload']    = array('en-gb');
 
+// Date
+$_['date_timezone']        = 'UTC';
+
 // Database
 $_['db_autostart']         = false;
-$_['db_type']              = 'mysqli'; // mpdo, mssql, mysql, mysqli or postgre
+$_['db_type']              = 'mysqli'; // mysqli, pdo or pgsql
 $_['db_hostname']          = 'localhost';
 $_['db_username']          = 'root';
 $_['db_password']          = '';
@@ -48,7 +50,7 @@ $_['config_error_display'] = true;
 $_['config_error_log']     = true;
 $_['config_error_filename'] = 'error.log';
 
-// Reponse
+// Response
 $_['response_header']      = array('Content-Type: text/html; charset=utf-8');
 $_['response_compression'] = 0;
 
@@ -58,8 +60,11 @@ $_['config_autoload']      = array();
 // Autoload Libraries
 $_['library_autoload']     = array();
 
-// Autoload Libraries
+// Autoload Models
 $_['model_autoload']       = array();
+
+// Autoload Helpers
+$_['helper_autoload']      = array();
 
 // Actions
 $_['action_default']       = 'common/home';

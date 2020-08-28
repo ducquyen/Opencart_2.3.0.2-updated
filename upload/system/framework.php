@@ -56,7 +56,7 @@ $registry->set('cache', new Cache($config->get('cache_type'), $config->get('cach
 
 // Url
 if ($config->get('url_autostart')) {
-	$registry->set('url', new Url($config->get('site_base'), $config->get('site_ssl')));
+	$registry->set('url', new Url($config->get('site_url')));
 }
 
 // Language
@@ -78,6 +78,13 @@ if ($config->has('config_autoload')) {
 if ($config->has('language_autoload')) {
 	foreach ($config->get('language_autoload') as $value) {
 		$loader->language($value);
+	}
+}
+
+// Helper Autoload
+if ($config->has('helper_autoload')) {
+	foreach ($config->get('helper_autoload') as $value) {
+		$loader->helper($value);
 	}
 }
 
