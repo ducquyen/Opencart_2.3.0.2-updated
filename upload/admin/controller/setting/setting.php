@@ -408,11 +408,7 @@ class ControllerSettingSetting extends Controller {
 			$data['config_theme'] = $this->config->get('config_theme');
 		}
 
-		if ($this->request->server['HTTPS']) {
-			$data['store_url'] = HTTPS_CATALOG;
-		} else {
-			$data['store_url'] = HTTP_CATALOG;
-		}
+		$data['store_url'] = HTTP_CATALOG;
 
 		$data['themes'] = array();
 
@@ -430,7 +426,7 @@ class ControllerSettingSetting extends Controller {
 		}
 			
 		if (isset($this->request->post['config_layout_id'])) {
-			$data['config_layout_id'] = $this->request->post['config_layout_id'];
+			$data['config_layout_id'] = (int)$this->request->post['config_layout_id'];
 		} else {
 			$data['config_layout_id'] = $this->config->get('config_layout_id');
 		}
@@ -489,15 +485,13 @@ class ControllerSettingSetting extends Controller {
 
 		$this->load->model('tool/image');
 
-		if (isset($this->request->post['config_image']) && is_file(DIR_IMAGE . $this->request->post['config_image'])) {
-			$data['thumb'] = $this->model_tool_image->resize($this->request->post['config_image'], 100, 100);
-		} elseif ($this->config->get('config_image') && is_file(DIR_IMAGE . $this->config->get('config_image'))) {
-			$data['thumb'] = $this->model_tool_image->resize($this->config->get('config_image'), 100, 100);
-		} else {
-			$data['thumb'] = $this->model_tool_image->resize('no_image.png', 100, 100);
-		}
-
 		$data['placeholder'] = $this->model_tool_image->resize('no_image.png', 100, 100);
+
+		if (is_file(DIR_IMAGE . html_entity_decode($data['config_image'], ENT_QUOTES, 'UTF-8'))) {
+			$data['thumb'] = $this->model_tool_image->resize(html_entity_decode($data['config_image'], ENT_QUOTES, 'UTF-8'), 100, 100);
+		} else {			
+			$data['thumb'] = $data['placeholder'];
+		}
 
 		if (isset($this->request->post['config_open'])) {
 			$data['config_open'] = $this->request->post['config_open'];
@@ -524,7 +518,7 @@ class ControllerSettingSetting extends Controller {
 		}
 
 		if (isset($this->request->post['config_country_id'])) {
-			$data['config_country_id'] = $this->request->post['config_country_id'];
+			$data['config_country_id'] = (int)$this->request->post['config_country_id'];
 		} else {
 			$data['config_country_id'] = $this->config->get('config_country_id');
 		}
@@ -534,7 +528,7 @@ class ControllerSettingSetting extends Controller {
 		$data['countries'] = $this->model_localisation_country->getCountries();
 
 		if (isset($this->request->post['config_zone_id'])) {
-			$data['config_zone_id'] = $this->request->post['config_zone_id'];
+			$data['config_zone_id'] = (int)$this->request->post['config_zone_id'];
 		} else {
 			$data['config_zone_id'] = $this->config->get('config_zone_id');
 		}
@@ -553,8 +547,8 @@ class ControllerSettingSetting extends Controller {
 		$timestamp = time();
 
 		$timezones = timezone_identifiers_list();
-		
-		foreach($timezones as $timezone) {
+
+		foreach ($timezones as $timezone) {
 			date_default_timezone_set($timezone);
 
 			$hour = ' (' . date('P', $timestamp) . ')';
@@ -623,7 +617,7 @@ class ControllerSettingSetting extends Controller {
 		$data['currencies'] = $this->model_localisation_currency->getCurrencies();
 
 		if (isset($this->request->post['config_length_class_id'])) {
-			$data['config_length_class_id'] = $this->request->post['config_length_class_id'];
+			$data['config_length_class_id'] = (int)$this->request->post['config_length_class_id'];
 		} else {
 			$data['config_length_class_id'] = $this->config->get('config_length_class_id');
 		}
@@ -633,7 +627,7 @@ class ControllerSettingSetting extends Controller {
 		$data['length_classes'] = $this->model_localisation_length_class->getLengthClasses();
 
 		if (isset($this->request->post['config_weight_class_id'])) {
-			$data['config_weight_class_id'] = $this->request->post['config_weight_class_id'];
+			$data['config_weight_class_id'] = (int)$this->request->post['config_weight_class_id'];
 		} else {
 			$data['config_weight_class_id'] = $this->config->get('config_weight_class_id');
 		}
@@ -649,19 +643,19 @@ class ControllerSettingSetting extends Controller {
 		}
 
 		if (isset($this->request->post['config_product_count'])) {
-			$data['config_product_count'] = $this->request->post['config_product_count'];
+			$data['config_product_count'] = (int)$this->request->post['config_product_count'];
 		} else {
 			$data['config_product_count'] = $this->config->get('config_product_count');
 		}
 
 		if (isset($this->request->post['config_review_status'])) {
-			$data['config_review_status'] = $this->request->post['config_review_status'];
+			$data['config_review_status'] = (int)$this->request->post['config_review_status'];
 		} else {
 			$data['config_review_status'] = $this->config->get('config_review_status');
 		}
 
 		if (isset($this->request->post['config_review_guest'])) {
-			$data['config_review_guest'] = $this->request->post['config_review_guest'];
+			$data['config_review_guest'] = (int)$this->request->post['config_review_guest'];
 		} else {
 			$data['config_review_guest'] = $this->config->get('config_review_guest');
 		}
@@ -679,7 +673,7 @@ class ControllerSettingSetting extends Controller {
 		}
 
 		if (isset($this->request->post['config_tax'])) {
-			$data['config_tax'] = $this->request->post['config_tax'];
+			$data['config_tax'] = (int)$this->request->post['config_tax'];
 		} else {
 			$data['config_tax'] = $this->config->get('config_tax');
 		}
@@ -697,25 +691,25 @@ class ControllerSettingSetting extends Controller {
 		}
 
 		if (isset($this->request->post['config_customer_online'])) {
-			$data['config_customer_online'] = $this->request->post['config_customer_online'];
+			$data['config_customer_online'] = (int)$this->request->post['config_customer_online'];
 		} else {
 			$data['config_customer_online'] = $this->config->get('config_customer_online');
 		}
 
 		if (isset($this->request->post['config_customer_activity'])) {
-			$data['config_customer_activity'] = $this->request->post['config_customer_activity'];
+			$data['config_customer_activity'] = (int)$this->request->post['config_customer_activity'];
 		} else {
 			$data['config_customer_activity'] = $this->config->get('config_customer_activity');
 		}
 
 		if (isset($this->request->post['config_customer_search'])) {
-			$data['config_customer_search'] = $this->request->post['config_customer_search'];
+			$data['config_customer_search'] = (int)$this->request->post['config_customer_search'];
 		} else {
 			$data['config_customer_search'] = $this->config->get('config_customer_search');
 		}
 
 		if (isset($this->request->post['config_customer_group_id'])) {
-			$data['config_customer_group_id'] = $this->request->post['config_customer_group_id'];
+			$data['config_customer_group_id'] = (int)$this->request->post['config_customer_group_id'];
 		} else {
 			$data['config_customer_group_id'] = $this->config->get('config_customer_group_id');
 		}
@@ -733,13 +727,13 @@ class ControllerSettingSetting extends Controller {
 		}
 
 		if (isset($this->request->post['config_customer_price'])) {
-			$data['config_customer_price'] = $this->request->post['config_customer_price'];
+			$data['config_customer_price'] = (int)$this->request->post['config_customer_price'];
 		} else {
 			$data['config_customer_price'] = $this->config->get('config_customer_price');
 		}
 
 		if (isset($this->request->post['config_login_attempts'])) {
-			$data['config_login_attempts'] = $this->request->post['config_login_attempts'];
+			$data['config_login_attempts'] = (int)$this->request->post['config_login_attempts'];
 		} elseif ($this->config->has('config_login_attempts')) {
 			$data['config_login_attempts'] = $this->config->get('config_login_attempts');
 		} else {
@@ -747,7 +741,7 @@ class ControllerSettingSetting extends Controller {
 		}
 
 		if (isset($this->request->post['config_account_id'])) {
-			$data['config_account_id'] = $this->request->post['config_account_id'];
+			$data['config_account_id'] = (int)$this->request->post['config_account_id'];
 		} else {
 			$data['config_account_id'] = $this->config->get('config_account_id');
 		}
@@ -757,19 +751,19 @@ class ControllerSettingSetting extends Controller {
 		$data['informations'] = $this->model_catalog_information->getInformations();
 
 		if (isset($this->request->post['config_cart_weight'])) {
-			$data['config_cart_weight'] = $this->request->post['config_cart_weight'];
+			$data['config_cart_weight'] = (int)$this->request->post['config_cart_weight'];
 		} else {
 			$data['config_cart_weight'] = $this->config->get('config_cart_weight');
 		}
 
 		if (isset($this->request->post['config_checkout_guest'])) {
-			$data['config_checkout_guest'] = $this->request->post['config_checkout_guest'];
+			$data['config_checkout_guest'] = (int)$this->request->post['config_checkout_guest'];
 		} else {
 			$data['config_checkout_guest'] = $this->config->get('config_checkout_guest');
 		}
 
 		if (isset($this->request->post['config_checkout_id'])) {
-			$data['config_checkout_id'] = $this->request->post['config_checkout_id'];
+			$data['config_checkout_id'] = (int)$this->request->post['config_checkout_id'];
 		} else {
 			$data['config_checkout_id'] = $this->config->get('config_checkout_id');
 		}
@@ -783,7 +777,7 @@ class ControllerSettingSetting extends Controller {
 		}
 
 		if (isset($this->request->post['config_order_status_id'])) {
-			$data['config_order_status_id'] = $this->request->post['config_order_status_id'];
+			$data['config_order_status_id'] = (int)$this->request->post['config_order_status_id'];
 		} else {
 			$data['config_order_status_id'] = $this->config->get('config_order_status_id');
 		}
@@ -805,7 +799,7 @@ class ControllerSettingSetting extends Controller {
 		}
 
 		if (isset($this->request->post['config_fraud_status_id'])) {
-			$data['config_fraud_status_id'] = $this->request->post['config_fraud_status_id'];
+			$data['config_fraud_status_id'] = (int)$this->request->post['config_fraud_status_id'];
 		} else {
 			$data['config_fraud_status_id'] = $this->config->get('config_fraud_status_id');
 		}
@@ -815,7 +809,7 @@ class ControllerSettingSetting extends Controller {
 		$data['order_statuses'] = $this->model_localisation_order_status->getOrderStatuses();
 
 		if (isset($this->request->post['config_api_id'])) {
-			$data['config_api_id'] = $this->request->post['config_api_id'];
+			$data['config_api_id'] = (int)$this->request->post['config_api_id'];
 		} else {
 			$data['config_api_id'] = $this->config->get('config_api_id');
 		}
@@ -825,19 +819,19 @@ class ControllerSettingSetting extends Controller {
 		$data['apis'] = $this->model_user_api->getApis();
 
 		if (isset($this->request->post['config_stock_display'])) {
-			$data['config_stock_display'] = $this->request->post['config_stock_display'];
+			$data['config_stock_display'] = (int)$this->request->post['config_stock_display'];
 		} else {
 			$data['config_stock_display'] = $this->config->get('config_stock_display');
 		}
 
 		if (isset($this->request->post['config_stock_warning'])) {
-			$data['config_stock_warning'] = $this->request->post['config_stock_warning'];
+			$data['config_stock_warning'] = (int)$this->request->post['config_stock_warning'];
 		} else {
 			$data['config_stock_warning'] = $this->config->get('config_stock_warning');
 		}
 
 		if (isset($this->request->post['config_stock_checkout'])) {
-			$data['config_stock_checkout'] = $this->request->post['config_stock_checkout'];
+			$data['config_stock_checkout'] = (int)$this->request->post['config_stock_checkout'];
 		} else {
 			$data['config_stock_checkout'] = $this->config->get('config_stock_checkout');
 		}
@@ -851,7 +845,7 @@ class ControllerSettingSetting extends Controller {
 		}
 
 		if (isset($this->request->post['config_affiliate_auto'])) {
-			$data['config_affiliate_auto'] = $this->request->post['config_affiliate_auto'];
+			$data['config_affiliate_auto'] = (int)$this->request->post['config_affiliate_auto'];
 		} elseif ($this->config->has('config_affiliate_auto')) {
 			$data['config_affiliate_auto'] = $this->config->get('config_affiliate_auto');
 		} else {
@@ -867,19 +861,19 @@ class ControllerSettingSetting extends Controller {
 		}
 
 		if (isset($this->request->post['config_affiliate_id'])) {
-			$data['config_affiliate_id'] = $this->request->post['config_affiliate_id'];
+			$data['config_affiliate_id'] = (int)$this->request->post['config_affiliate_id'];
 		} else {
 			$data['config_affiliate_id'] = $this->config->get('config_affiliate_id');
 		}
 
 		if (isset($this->request->post['config_return_id'])) {
-			$data['config_return_id'] = $this->request->post['config_return_id'];
+			$data['config_return_id'] = (int)$this->request->post['config_return_id'];
 		} else {
 			$data['config_return_id'] = $this->config->get('config_return_id');
 		}
 
 		if (isset($this->request->post['config_return_status_id'])) {
-			$data['config_return_status_id'] = $this->request->post['config_return_status_id'];
+			$data['config_return_status_id'] = (int)$this->request->post['config_return_status_id'];
 		} else {
 			$data['config_return_status_id'] = $this->config->get('config_return_status_id');
 		}
@@ -953,12 +947,12 @@ class ControllerSettingSetting extends Controller {
 			$data['config_logo'] = $this->config->get('config_logo');
 		}
 
-		if (isset($this->request->post['config_logo']) && is_file(DIR_IMAGE . $this->request->post['config_logo'])) {
-			$data['logo'] = $this->model_tool_image->resize($this->request->post['config_logo'], 100, 100);
-		} elseif ($this->config->get('config_logo') && is_file(DIR_IMAGE . $this->config->get('config_logo'))) {
-			$data['logo'] = $this->model_tool_image->resize($this->config->get('config_logo'), 100, 100);
-		} else {
-			$data['logo'] = $this->model_tool_image->resize('no_image.png', 100, 100);
+		$data['placeholder'] = $this->model_tool_image->resize('no_image.png', 100, 100);
+
+		if (is_file(DIR_IMAGE . html_entity_decode($data['config_logo'], ENT_QUOTES, 'UTF-8'))) {
+			$data['logo'] = $this->model_tool_image->resize(html_entity_decode($data['config_logo'], ENT_QUOTES, 'UTF-8'), 100, 100);
+		} else {			
+			$data['logo'] = $data['placeholder'];
 		}
 
 		if (isset($this->request->post['config_icon'])) {
@@ -967,12 +961,10 @@ class ControllerSettingSetting extends Controller {
 			$data['config_icon'] = $this->config->get('config_icon');
 		}
 
-		if (isset($this->request->post['config_icon']) && is_file(DIR_IMAGE . $this->request->post['config_icon'])) {
-			$data['icon'] = $this->model_tool_image->resize($this->request->post['config_icon'], 100, 100);
-		} elseif ($this->config->get('config_icon') && is_file(DIR_IMAGE . $this->config->get('config_icon'))) {
-			$data['icon'] = $this->model_tool_image->resize($this->config->get('config_icon'), 100, 100);
+		if (is_file(DIR_IMAGE . html_entity_decode($data['config_icon'], ENT_QUOTES, 'UTF-8'))) {
+			$data['icon'] = $this->model_tool_image->resize(html_entity_decode($data['config_icon'], ENT_QUOTES, 'UTF-8'), 100, 100);
 		} else {
-			$data['icon'] = $this->model_tool_image->resize('no_image.png', 100, 100);
+			$data['icon'] = $data['placeholder'];
 		}
 
 		if (isset($this->request->post['config_ftp_hostname'])) {
@@ -1046,7 +1038,7 @@ class ControllerSettingSetting extends Controller {
 		}
 
 		if (isset($this->request->post['config_mail_smtp_port'])) {
-			$data['config_mail_smtp_port'] = $this->request->post['config_mail_smtp_port'];
+			$data['config_mail_smtp_port'] = (int)$this->request->post['config_mail_smtp_port'];
 		} elseif ($this->config->has('config_mail_smtp_port')) {
 			$data['config_mail_smtp_port'] = $this->config->get('config_mail_smtp_port');
 		} else {
@@ -1054,7 +1046,7 @@ class ControllerSettingSetting extends Controller {
 		}
 
 		if (isset($this->request->post['config_mail_smtp_timeout'])) {
-			$data['config_mail_smtp_timeout'] = $this->request->post['config_mail_smtp_timeout'];
+			$data['config_mail_smtp_timeout'] = (int)$this->request->post['config_mail_smtp_timeout'];
 		} elseif ($this->config->has('config_mail_smtp_timeout')) {
 			$data['config_mail_smtp_timeout'] = $this->config->get('config_mail_smtp_timeout');
 		} else {
@@ -1098,13 +1090,13 @@ class ControllerSettingSetting extends Controller {
 		}
 
 		if (isset($this->request->post['config_secure'])) {
-			$data['config_secure'] = $this->request->post['config_secure'];
+			$data['config_secure'] = (int)$this->request->post['config_secure'];
 		} else {
 			$data['config_secure'] = $this->config->get('config_secure');
 		}
 
 		if (isset($this->request->post['config_shared'])) {
-			$data['config_shared'] = $this->request->post['config_shared'];
+			$data['config_shared'] = (int)$this->request->post['config_shared'];
 		} else {
 			$data['config_shared'] = $this->config->get('config_shared');
 		}
@@ -1116,7 +1108,7 @@ class ControllerSettingSetting extends Controller {
 		}
 
 		if (isset($this->request->post['config_seo_url'])) {
-			$data['config_seo_url'] = $this->request->post['config_seo_url'];
+			$data['config_seo_url'] = (int)$this->request->post['config_seo_url'];
 		} else {
 			$data['config_seo_url'] = $this->config->get('config_seo_url');
 		}
@@ -1142,7 +1134,7 @@ class ControllerSettingSetting extends Controller {
 		}
 
 		if (isset($this->request->post['config_maintenance'])) {
-			$data['config_maintenance'] = $this->request->post['config_maintenance'];
+			$data['config_maintenance'] = (int)$this->request->post['config_maintenance'];
 		} else {
 			$data['config_maintenance'] = $this->config->get('config_maintenance');
 		}
@@ -1154,25 +1146,25 @@ class ControllerSettingSetting extends Controller {
 		}
 
 		if (isset($this->request->post['config_encryption'])) {
-			$data['config_encryption'] = $this->request->post['config_encryption'];
+			$data['config_encryption'] = (int)$this->request->post['config_encryption'];
 		} else {
 			$data['config_encryption'] = $this->config->get('config_encryption');
 		}
 
 		if (isset($this->request->post['config_compression'])) {
-			$data['config_compression'] = $this->request->post['config_compression'];
+			$data['config_compression'] = (int)$this->request->post['config_compression'];
 		} else {
 			$data['config_compression'] = $this->config->get('config_compression');
 		}
 
 		if (isset($this->request->post['config_error_display'])) {
-			$data['config_error_display'] = $this->request->post['config_error_display'];
+			$data['config_error_display'] = (int)$this->request->post['config_error_display'];
 		} else {
 			$data['config_error_display'] = $this->config->get('config_error_display');
 		}
 
 		if (isset($this->request->post['config_error_log'])) {
-			$data['config_error_log'] = $this->request->post['config_error_log'];
+			$data['config_error_log'] = (int)$this->request->post['config_error_log'];
 		} else {
 			$data['config_error_log'] = $this->config->get('config_error_log');
 		}
@@ -1285,23 +1277,17 @@ class ControllerSettingSetting extends Controller {
 	}
 	
 	public function theme() {
-		if ($this->request->server['HTTPS']) {
-			$server = HTTPS_CATALOG;
-		} else {
-			$server = HTTP_CATALOG;
-		}
-		
 		// This is only here for compatibility with old themes.
 		if ($this->request->get['theme'] == 'theme_default') {
 			$theme = $this->config->get('theme_default_directory');
 		} else {
 			$theme = basename($this->request->get['theme']);
 		}
-		
+
 		if (is_file(DIR_CATALOG . 'view/theme/' . $theme . '/image/' . $theme . '.png')) {
-			$this->response->setOutput($server . 'catalog/view/theme/' . $theme . '/image/' . $theme . '.png');
+			$this->response->setOutput(HTTP_CATALOG . 'catalog/view/theme/' . $theme . '/image/' . $theme . '.png');
 		} else {
-			$this->response->setOutput($server . 'image/no_image.png');
+			$this->response->setOutput(HTTP_CATALOG . 'image/no_image.png');
 		}
 	}	
 }
