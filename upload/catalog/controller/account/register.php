@@ -187,7 +187,7 @@ class ControllerAccountRegister extends Controller {
 		}
 
 		if (isset($this->request->post['customer_group_id'])) {
-			$data['customer_group_id'] =(int) $this->request->post['customer_group_id'];
+			$data['customer_group_id'] = (int)$this->request->post['customer_group_id'];
 		} else {
 			$data['customer_group_id'] = $this->config->get('config_customer_group_id');
 		}
