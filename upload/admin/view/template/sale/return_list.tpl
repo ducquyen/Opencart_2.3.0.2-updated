@@ -122,7 +122,7 @@
                     <?php } else { ?>
                     <a href="<?php echo $sort_model; ?>"><?php echo $column_model; ?></a>
                     <?php } ?></td>
-                  <td class="text-left"><?php if ($sort == 'status') { ?>
+                  <td class="text-left"><?php if ($sort == 'return_status') { ?>
                     <a href="<?php echo $sort_status; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_status; ?></a>
                     <?php } else { ?>
                     <a href="<?php echo $sort_status; ?>"><?php echo $column_status; ?></a>
