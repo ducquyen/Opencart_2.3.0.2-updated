@@ -289,7 +289,7 @@ $('input[name=\'product\']').autocomplete({
 	}
 });
 
-$('#history').delegate('.pagination a', 'click', function(e) {
+$('#history').on('click', '.pagination a', function(e) {
 	e.preventDefault();
 	
 	$('#history').load(this.href);

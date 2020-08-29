@@ -86,7 +86,7 @@
     </div>
   </div>
   <script type="text/javascript"><!--
-$('#ip').delegate('.pagination a', 'click', function(e) {
+$('#ip').on('click', '.pagination a', function(e) {
 	e.preventDefault();
 	
 	$('#ip').load(this.href);
@@ -127,7 +127,7 @@ $('#button-ip-add').on('click', function() {
 	});
 });
 
-$('#ip').delegate('button', 'click', function() {
+$('#ip').on('click', 'button', function() {
 	var element = this;
 	
 	$.ajax({

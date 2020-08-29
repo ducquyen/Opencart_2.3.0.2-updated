@@ -434,7 +434,7 @@
 		}
 	});
 
-	$('#laybuy-category').delegate('.fa-minus-circle', 'click', function() {
+	$('#laybuy-category').on('click', '.fa-minus-circle', function() {
 		$(this).parent().remove();
 	});
 //--></script>
@@ -464,7 +464,7 @@
 		}
 	});
 
-	$('#laybuy-customer-group').delegate('.fa-minus-circle', 'click', function() {
+	$('#laybuy-customer-group').on('click', '.fa-minus-circle', function() {
 		$(this).parent().remove();
 	});
 //--></script>

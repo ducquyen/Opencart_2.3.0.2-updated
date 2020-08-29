@@ -952,7 +952,7 @@ $('#order a[data-toggle=\'tab\']').on('click', function(e) {
 	return false;
 });
 
-$(document).delegate('#button-ip-add', 'click', function() {
+$(document).on('click', '#button-ip-add', function() {
 	$.ajax({
 		url: 'index.php?route=user/api/addip&token=<?php echo $token; ?>&api_id=<?php echo $api_id; ?>',
 		type: 'post',
@@ -1736,7 +1736,7 @@ $('#button-voucher-add').on('click', function() {
 	});
 });
 
-$('#cart').delegate('.btn-danger', 'click', function() {
+$('#cart').on('click', '.btn-danger', function() {
 	var node = this;
 
 	$.ajax({
@@ -1768,7 +1768,7 @@ $('#cart').delegate('.btn-danger', 'click', function() {
 	});
 });
 
-$('#cart').delegate('.btn-primary', 'click', function() {
+$('#cart').on('click', '.btn-primary', function() {
     var node = this;
 
     // Refresh products, vouchers and totals
@@ -2443,7 +2443,7 @@ $('#button-save').on('click', function() {
 	});
 });
 
-$('#content').delegate('button[id^=\'button-upload\'], button[id^=\'button-custom-field\'], button[id^=\'button-payment-custom-field\'], button[id^=\'button-shipping-custom-field\']', 'click', function() {
+$('#content').on('click', 'button[id^=\'button-upload\'], button[id^=\'button-custom-field\'], button[id^=\'button-payment-custom-field\'], button[id^=\'button-shipping-custom-field\']', function() {
 	var node = this;
 
 	$('#form-upload').remove();

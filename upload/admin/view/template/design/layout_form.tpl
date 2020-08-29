@@ -407,7 +407,7 @@ function addModule(type) {
 	module_row++;
 }
 
-$('#module-column-left, #module-column-right, #module-content-top, #module-content-bottom').delegate('select[name*=\'code\']', 'change', function() {
+$('#module-column-left, #module-column-right, #module-content-top, #module-content-bottom').on('click', 'select[name*=\'code\']', 'change', function() {
 	var part = this.value.split('.');
 	
 	if (!part[1]) {

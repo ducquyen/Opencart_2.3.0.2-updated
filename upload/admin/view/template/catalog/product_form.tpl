@@ -979,7 +979,7 @@ $('input[name=\'category\']').autocomplete({
 	}
 });
 
-$('#product-category').delegate('.fa-minus-circle', 'click', function() {
+$('#product-category').on('click', '.fa-minus-circle', function() {
 	$(this).parent().remove();
 });
 
@@ -1008,7 +1008,7 @@ $('input[name=\'filter\']').autocomplete({
 	}
 });
 
-$('#product-filter').delegate('.fa-minus-circle', 'click', function() {
+$('#product-filter').on('click', '.fa-minus-circle', function() {
 	$(this).parent().remove();
 });
 
@@ -1037,7 +1037,7 @@ $('input[name=\'download\']').autocomplete({
 	}
 });
 
-$('#product-download').delegate('.fa-minus-circle', 'click', function() {
+$('#product-download').on('click', '.fa-minus-circle', function() {
 	$(this).parent().remove();
 });
 
@@ -1066,7 +1066,7 @@ $('input[name=\'related\']').autocomplete({
 	}
 });
 
-$('#product-related').delegate('.fa-minus-circle', 'click', function() {
+$('#product-related').on('click', '.fa-minus-circle', function() {
 	$(this).parent().remove();
 });
 //--></script>

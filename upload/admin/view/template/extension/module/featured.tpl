@@ -114,7 +114,7 @@ $('input[name=\'product_name\']').autocomplete({
 	}
 });
 	
-$('#featured-product').delegate('.fa-minus-circle', 'click', function() {
+$('#featured-product').on('click', '.fa-minus-circle', function() {
 	$(this).parent().remove();
 });
 //--></script></div>

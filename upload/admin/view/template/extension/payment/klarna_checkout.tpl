@@ -354,7 +354,7 @@ function addAccount() {
 	account_row++;
 }
 
-$(document).delegate('#button-ip-add', 'click', function() {
+$(document).on('click', '#button-ip-add', function() {
 	$.ajax({
 		url: 'index.php?route=user/api/addip&token=<?php echo $token; ?>&api_id=<?php echo $api_id; ?>',
 		type: 'post',

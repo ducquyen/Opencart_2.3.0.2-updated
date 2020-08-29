@@ -358,7 +358,7 @@
     </div>
   </div>
   <script type="text/javascript"><!--
-$(document).delegate('#button-ip-add', 'click', function() {
+$(document).on('click', '#button-ip-add', function() {
 	$.ajax({
 		url: 'index.php?route=user/api/addip&token=<?php echo $token; ?>&api_id=<?php echo $api_id; ?>',
 		type: 'post',
@@ -387,7 +387,7 @@ $(document).delegate('#button-ip-add', 'click', function() {
 	});
 });
 
-$(document).delegate('#button-invoice', 'click', function() {
+$(document).on('click', '#button-invoice', function() {
 	$.ajax({
 		url: 'index.php?route=sale/order/createinvoiceno&token=<?php echo $token; ?>&order_id=<?php echo $order_id; ?>',
 		dataType: 'json',
@@ -416,7 +416,7 @@ $(document).delegate('#button-invoice', 'click', function() {
 	});
 });
 
-$(document).delegate('#button-reward-add', 'click', function() {
+$(document).on('click', '#button-reward-add', function() {
 	$.ajax({
 		url: 'index.php?route=sale/order/addreward&token=<?php echo $token; ?>&order_id=<?php echo $order_id; ?>',
 		type: 'post',
@@ -446,7 +446,7 @@ $(document).delegate('#button-reward-add', 'click', function() {
 	});
 });
 
-$(document).delegate('#button-reward-remove', 'click', function() {
+$(document).on('click', '#button-reward-remove', function() {
 	$.ajax({
 		url: 'index.php?route=sale/order/removereward&token=<?php echo $token; ?>&order_id=<?php echo $order_id; ?>',
 		type: 'post',
@@ -476,7 +476,7 @@ $(document).delegate('#button-reward-remove', 'click', function() {
 	});
 });
 
-$(document).delegate('#button-commission-add', 'click', function() {
+$(document).on('click', '#button-commission-add', function() {
 	$.ajax({
 		url: 'index.php?route=sale/order/addcommission&token=<?php echo $token; ?>&order_id=<?php echo $order_id; ?>',
 		type: 'post',
@@ -506,7 +506,7 @@ $(document).delegate('#button-commission-add', 'click', function() {
 	});
 });
 
-$(document).delegate('#button-commission-remove', 'click', function() {
+$(document).on('click', '#button-commission-remove', function() {
 	$.ajax({
 		url: 'index.php?route=sale/order/removecommission&token=<?php echo $token; ?>&order_id=<?php echo $order_id; ?>',
 		type: 'post',
@@ -567,7 +567,7 @@ $.ajax({
 	}
 });
 
-$('#history').delegate('.pagination a', 'click', function(e) {
+$('#history').on('click', '.pagination a', function(e) {
 	e.preventDefault();
 
 	$('#history').load(this.href);

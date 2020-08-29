@@ -383,7 +383,7 @@ $('input[name=\'payment\']').on('change', function() {
 $('input[name=\'payment\']:checked').trigger('change');
 //--></script> 
   <script type="text/javascript"><!--
-$('#transaction').delegate('.pagination a', 'click', function(e) {
+$('#transaction').on('click', '.pagination a', function(e) {
 	e.preventDefault();
 
 	$('#transaction').load(this.href);

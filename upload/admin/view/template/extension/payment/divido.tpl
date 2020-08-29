@@ -208,7 +208,7 @@
 		}
 	});
 
-	$('#divido-category').delegate('.fa-minus-circle', 'click', function() {
+	$('#divido-category').on('click', '.fa-minus-circle', function() {
 		$(this).parent().remove();
 	});
 

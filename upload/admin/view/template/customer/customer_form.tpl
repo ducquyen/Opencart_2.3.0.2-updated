@@ -951,7 +951,7 @@ function country(element, index, zone_id) {
 $('select[name$=\'[country_id]\']').trigger('change');
 //--></script>
   <script type="text/javascript"><!--
-$('#history').delegate('.pagination a', 'click', function(e) {
+$('#history').on('click', '.pagination a', function(e) {
 	e.preventDefault();
 
 	$('#history').load(this.href);
@@ -992,7 +992,7 @@ $('#button-history').on('click', function(e) {
 });
 //--></script>
   <script type="text/javascript"><!--
-$('#transaction').delegate('.pagination a', 'click', function(e) {
+$('#transaction').on('click', '.pagination a', function(e) {
 	e.preventDefault();
 
 	$('#transaction').load(this.href);
@@ -1034,7 +1034,7 @@ $('#button-transaction').on('click', function(e) {
 });
 //--></script>
   <script type="text/javascript"><!--
-$('#reward').delegate('.pagination a', 'click', function(e) {
+$('#reward').on('click', '.pagination a', function(e) {
 	e.preventDefault();
 
 	$('#reward').load(this.href);
@@ -1075,7 +1075,7 @@ $('#button-reward').on('click', function(e) {
 	});
 });
 
-$('#ip').delegate('.pagination a', 'click', function(e) {
+$('#ip').on('click', '.pagination a', function(e) {
 	e.preventDefault();
 
 	$('#ip').load(this.href);
@@ -1083,7 +1083,7 @@ $('#ip').delegate('.pagination a', 'click', function(e) {
 
 $('#ip').load('index.php?route=customer/customer/ip&token=<?php echo $token; ?>&customer_id=<?php echo $customer_id; ?>');
 
-$('#content').delegate('button[id^=\'button-custom-field\'], button[id^=\'button-address\']', 'click', function() {
+$('#content').on('click', 'button[id^=\'button-custom-field\'], button[id^=\'button-address\']', function() {
 	var node = this;
 
 	$('#form-upload').remove();
