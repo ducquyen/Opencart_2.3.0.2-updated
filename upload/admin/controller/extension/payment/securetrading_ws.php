@@ -442,7 +442,7 @@ class ControllerExtensionPaymentSecureTradingWs extends Controller {
 				$data['text_confirm_rebate'] = $this->language->get('text_confirm_rebate');
 
 				$data['order_id'] = $this->request->get['order_id'];
-				$data['token'] = $this->request->get['token'];
+				$data['token'] = $this->session->data['token'];
 				
 				return $this->load->view('extension/payment/securetrading_ws_order', $data);
 			}

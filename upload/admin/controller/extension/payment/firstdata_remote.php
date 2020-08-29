@@ -363,7 +363,7 @@ class ControllerExtensionPaymentFirstdataRemote extends Controller {
 				$data['button_void'] = $this->language->get('button_void');
 
 				$data['order_id'] = $this->request->get['order_id'];
-				$data['token'] = $this->request->get['token'];
+				$data['token'] = $this->session->data['token'];
 
 				return $this->load->view('extension/payment/firstdata_remote_order', $data);
 			}

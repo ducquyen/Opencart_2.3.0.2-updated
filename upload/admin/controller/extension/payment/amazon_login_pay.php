@@ -438,7 +438,7 @@ class ControllerExtensionPaymentAmazonLoginPay extends Controller {
 				$data['button_cancel'] = $this->language->get('button_cancel');
 
 				$data['order_id'] = $this->request->get['order_id'];
-				$data['token'] = $this->request->get['token'];
+				$data['token'] = $this->session->data['token'];
 
 				return $this->load->view('extension/payment/amazon_login_pay_order', $data);
 			}

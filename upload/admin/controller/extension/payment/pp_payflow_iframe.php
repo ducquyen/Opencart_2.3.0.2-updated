@@ -477,7 +477,7 @@ class ControllerExtensionPaymentPPPayflowIframe extends Controller {
 
 			$data['complete'] = $paypal_order['complete'];
 			$data['order_id'] = $this->request->get['order_id'];
-			$data['token'] = $this->request->get['token'];
+			$data['token'] = $this->session->data['token'];
 
 			$data['transactions'] = array();
 

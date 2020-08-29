@@ -46,7 +46,7 @@ class ControllerSaleRecurring extends Controller {
 		if (isset($this->request->get['sort'])) {
 			$sort = $this->request->get['sort'];
 		} else {
-			$sort = 'order_recurring_id';
+			$sort = 'or.order_recurring_id';
 		}
 
 		if (isset($this->request->get['filter_date_added'])) {
@@ -359,7 +359,7 @@ class ControllerSaleRecurring extends Controller {
 
 			$data['button_cancel'] = $this->language->get('button_cancel');
 
-			$data['token'] = $this->request->get['token'];
+			$data['token'] = $this->session->data['token'];
 			
 			$url = '';
 
