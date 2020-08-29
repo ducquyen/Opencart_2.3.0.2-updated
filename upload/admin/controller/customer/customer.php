@@ -859,7 +859,7 @@ class ControllerCustomerCustomer extends Controller {
 		$data['customer_groups'] = $this->model_customer_customer_group->getCustomerGroups();
 
 		if (isset($this->request->post['customer_group_id'])) {
-			$data['customer_group_id'] = $this->request->post['customer_group_id'];
+			$data['customer_group_id'] = (int)$this->request->post['customer_group_id'];
 		} elseif (!empty($customer_info)) {
 			$data['customer_group_id'] = $customer_info['customer_group_id'];
 		} else {
@@ -995,7 +995,7 @@ class ControllerCustomerCustomer extends Controller {
 		}
 
 		if (isset($this->request->post['address_id'])) {
-			$data['address_id'] = $this->request->post['address_id'];
+			$data['address_id'] = (int)$this->request->post['address_id'];
 		} elseif (!empty($customer_info)) {
 			$data['address_id'] = $customer_info['address_id'];
 		} else {

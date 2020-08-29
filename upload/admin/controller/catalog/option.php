@@ -386,8 +386,8 @@ class ControllerCatalogOption extends Controller {
 
 		foreach ($option_values as $option_value) {
 			if (is_file(DIR_IMAGE . html_entity_decode($option_value['image'], ENT_QUOTES, 'UTF-8'))) {
-				$image = $option_value['image'];
-				$thumb = $option_value['image'];
+				$image = html_entity_decode($option_value['image'], ENT_QUOTES, 'UTF-8');
+				$thumb = html_entity_decode($option_value['image'], ENT_QUOTES, 'UTF-8');
 			} else {
 				$image = '';
 				$thumb = 'no_image.png';
@@ -397,7 +397,7 @@ class ControllerCatalogOption extends Controller {
 				'option_value_id'          => $option_value['option_value_id'],
 				'option_value_description' => $option_value['option_value_description'],
 				'image'                    => $image,
-				'thumb'                    => $this->model_tool_image->resize(html_entity_decode($thumb, ENT_QUOTES, 'UTF-8'), 100, 100),
+				'thumb'                    => $this->model_tool_image->resize($thumb, 100, 100),
 				'sort_order'               => $option_value['sort_order']
 			);
 		}

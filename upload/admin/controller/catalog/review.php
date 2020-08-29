@@ -269,7 +269,7 @@ class ControllerCatalogReview extends Controller {
 				'name'       => $result['name'],
 				'author'     => $result['author'],
 				'rating'     => $result['rating'],
-				'status'     => ($result['status']) ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
+				'status'     => $result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
 				'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
 				'edit'       => $this->url->link('catalog/review/edit', 'token=' . $this->session->data['token'] . '&review_id=' . $result['review_id'] . $url, true)
 			);
@@ -516,7 +516,7 @@ class ControllerCatalogReview extends Controller {
 		$this->load->model('catalog/product');
 
 		if (isset($this->request->post['product_id'])) {
-			$data['product_id'] = $this->request->post['product_id'];
+			$data['product_id'] = (int)$this->request->post['product_id'];
 		} elseif (!empty($review_info)) {
 			$data['product_id'] = $review_info['product_id'];
 		} else {
@@ -524,7 +524,7 @@ class ControllerCatalogReview extends Controller {
 		}
 
 		if (isset($this->request->post['product'])) {
-			$data['product'] = $this->request->post['product'];
+			$data['product'] = (int)$this->request->post['product'];
 		} elseif (!empty($review_info)) {
 			$data['product'] = $review_info['product'];
 		} else {

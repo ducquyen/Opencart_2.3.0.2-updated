@@ -422,7 +422,7 @@ class ControllerCatalogCategory extends Controller {
 		}
 
 		if (isset($this->request->post['parent_id'])) {
-			$data['parent_id'] = $this->request->post['parent_id'];
+			$data['parent_id'] = (int)$this->request->post['parent_id'];
 		} elseif (!empty($category_info)) {
 			$data['parent_id'] = $category_info['parent_id'];
 		} else {
@@ -473,7 +473,7 @@ class ControllerCatalogCategory extends Controller {
 		}
 
 		if (isset($this->request->post['image'])) {
-			$data['image'] = $this->request->post['image'];
+			$data['image'] = html_entity_decode($this->request->post['image'], ENT_QUOTES, 'UTF-8');
 		} elseif (!empty($category_info)) {
 			$data['image'] = $category_info['image'];
 		} else {

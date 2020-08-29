@@ -595,7 +595,7 @@ class ControllerSaleReturn extends Controller {
 		$data['token'] = $this->session->data['token'];
 
 		if (isset($this->request->get['return_id'])) {
-			$data['return_id'] = $this->request->get['return_id'];
+			$data['return_id'] = (int)$this->request->get['return_id'];
 		} else {
 			$data['return_id'] = 0;
 		}
@@ -743,7 +743,7 @@ class ControllerSaleReturn extends Controller {
 		}
 
 		if (isset($this->request->post['customer_id'])) {
-			$data['customer_id'] = $this->request->post['customer_id'];
+			$data['customer_id'] = (int)$this->request->post['customer_id'];
 		} elseif (!empty($return_info)) {
 			$data['customer_id'] = $return_info['customer_id'];
 		} else {
@@ -791,7 +791,7 @@ class ControllerSaleReturn extends Controller {
 		}
 
 		if (isset($this->request->post['product_id'])) {
-			$data['product_id'] = $this->request->post['product_id'];
+			$data['product_id'] = (int)$this->request->post['product_id'];
 		} elseif (!empty($return_info)) {
 			$data['product_id'] = $return_info['product_id'];
 		} else {
@@ -823,7 +823,7 @@ class ControllerSaleReturn extends Controller {
 		}
 
 		if (isset($this->request->post['return_reason_id'])) {
-			$data['return_reason_id'] = $this->request->post['return_reason_id'];
+			$data['return_reason_id'] = (int)$this->request->post['return_reason_id'];
 		} elseif (!empty($return_info)) {
 			$data['return_reason_id'] = $return_info['return_reason_id'];
 		} else {
@@ -835,7 +835,7 @@ class ControllerSaleReturn extends Controller {
 		$data['return_reasons'] = $this->model_localisation_return_reason->getReturnReasons();
 
 		if (isset($this->request->post['return_action_id'])) {
-			$data['return_action_id'] = $this->request->post['return_action_id'];
+			$data['return_action_id'] = (int)$this->request->post['return_action_id'];
 		} elseif (!empty($return_info)) {
 			$data['return_action_id'] = $return_info['return_action_id'];
 		} else {
@@ -855,7 +855,7 @@ class ControllerSaleReturn extends Controller {
 		}
 
 		if (isset($this->request->post['return_status_id'])) {
-			$data['return_status_id'] = $this->request->post['return_status_id'];
+			$data['return_status_id'] = (int)$this->request->post['return_status_id'];
 		} elseif (!empty($return_info)) {
 			$data['return_status_id'] = $return_info['return_status_id'];
 		} else {
