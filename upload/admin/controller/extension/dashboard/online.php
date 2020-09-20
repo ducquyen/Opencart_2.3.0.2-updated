@@ -103,8 +103,6 @@ class ControllerExtensionDashboardOnline extends Controller {
 
 		$data['text_view'] = $this->language->get('text_view');
 
-		$data['token'] = $this->session->data['token'];
-
 		// Total Orders
 		$this->load->model('report/customer');
 
