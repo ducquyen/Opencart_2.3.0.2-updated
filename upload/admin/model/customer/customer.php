@@ -105,7 +105,7 @@ class ModelCustomerCustomer extends Model {
 			$implode[] = "c.status = '" . (int)$data['filter_status'] . "'";
 		}
 
-		if (isset($data['filter_approved']) && !is_null($data['filter_approved'])) {
+		if (isset($data['filter_approved']) && $data['filter_approved'] !== '') {
 			$implode[] = "c.approved = '" . (int)$data['filter_approved'] . "'";
 		}
 
@@ -293,7 +293,7 @@ class ModelCustomerCustomer extends Model {
 			$implode[] = "email LIKE '" . $this->db->escape($data['filter_email']) . "%'";
 		}
 
-		if (isset($data['filter_newsletter']) && !is_null($data['filter_newsletter'])) {
+		if (isset($data['filter_newsletter']) && $data['filter_newsletter'] !== '') {
 			$implode[] = "newsletter = '" . (int)$data['filter_newsletter'] . "'";
 		}
 
