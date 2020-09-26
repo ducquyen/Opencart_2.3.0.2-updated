@@ -228,37 +228,37 @@ class ControllerCatalogProduct extends Controller {
 		if (isset($this->request->get['filter_name'])) {
 			$filter_name = $this->request->get['filter_name'];
 		} else {
-			$filter_name = null;
+			$filter_name = '';
 		}
 
 		if (isset($this->request->get['filter_model'])) {
 			$filter_model = $this->request->get['filter_model'];
 		} else {
-			$filter_model = null;
+			$filter_model = '';
 		}
 
 		if (isset($this->request->get['filter_price'])) {
 			$filter_price = $this->request->get['filter_price'];
 		} else {
-			$filter_price = null;
+			$filter_price = '';
 		}
 
 		if (isset($this->request->get['filter_quantity'])) {
 			$filter_quantity = $this->request->get['filter_quantity'];
 		} else {
-			$filter_quantity = null;
+			$filter_quantity = '';
 		}
 
 		if (isset($this->request->get['filter_status'])) {
 			$filter_status = $this->request->get['filter_status'];
 		} else {
-			$filter_status = null;
+			$filter_status = '';
 		}
 
 		if (isset($this->request->get['filter_image'])) {
 			$filter_image = $this->request->get['filter_image'];
 		} else {
-			$filter_image = null;
+			$filter_image = '';
 		}
 
 		if (isset($this->request->get['sort'])) {
@@ -1342,7 +1342,7 @@ class ControllerCatalogProduct extends Controller {
 
 			$url_alias_info = $this->model_catalog_url_alias->getUrlAlias($this->request->post['keyword']);
 
-			if ($url_alias_info && isset($this->request->get['product_id']) && $url_alias_info['query'] != 'product_id=' . $this->request->get['product_id']) {
+			if ($url_alias_info && isset($this->request->get['product_id']) && $url_alias_info['query'] != 'product_id=' . (int)$this->request->get['product_id']) {
 				$this->error['keyword'] = sprintf($this->language->get('error_keyword'));
 			}
 

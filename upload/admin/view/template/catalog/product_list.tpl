@@ -56,13 +56,13 @@
               <div class="form-group">
                 <label class="control-label" for="input-status"><?php echo $entry_status; ?></label>
                 <select name="filter_status" id="input-status" class="form-control">
-                  <option value="*"></option>
-                  <?php if ($filter_status) { ?>
+                  <option value=""></option>
+                  <?php if ($filter_status == '1') { ?>
                   <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
                   <?php } else { ?>
                   <option value="1"><?php echo $text_enabled; ?></option>
                   <?php } ?>
-                  <?php if (!$filter_status && !is_null($filter_status)) { ?>
+                  <?php if ($filter_status == '0') { ?>
                   <option value="0" selected="selected"><?php echo $text_disabled; ?></option>
                   <?php } else { ?>
                   <option value="0"><?php echo $text_disabled; ?></option>
@@ -72,13 +72,13 @@
               <div class="form-group">
                 <label class="control-label" for="input-image"><?php echo $entry_image; ?></label>
                 <select name="filter_image" id="input-image" class="form-control">
-                  <option value="*"></option>
-                  <?php if ($filter_image) { ?>
+                  <option value=""></option>
+                  <?php if ($filter_image == '1') { ?>
                   <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
                   <?php } else { ?>
                   <option value="1"><?php echo $text_enabled; ?></option>
                   <?php } ?>
-                  <?php if (!$filter_image && !is_null($filter_image)) { ?>
+                  <?php if ($filter_image == '0') { ?>
                   <option value="0" selected="selected"><?php echo $text_disabled; ?></option>
                   <?php } else { ?>
                   <option value="0"><?php echo $text_disabled; ?></option>
@@ -175,7 +175,7 @@
   </div>
   <script type="text/javascript"><!--
 $('#button-filter').on('click', function() {
-	var url = 'index.php?route=catalog/product&token=<?php echo $token; ?>';
+	var url = '';
 
 	var filter_name = $('input[name=\'filter_name\']').val();
 
@@ -203,17 +203,17 @@ $('#button-filter').on('click', function() {
 
 	var filter_status = $('select[name=\'filter_status\']').val();
 
-	if (filter_status != '*') {
+	if (filter_status !== '') {
 		url += '&filter_status=' + encodeURIComponent(filter_status);
 	}
 
   var filter_image = $('select[name=\'filter_image\']').val();
 
-  if (filter_image != '*') {
+  if (filter_image !== '') {
     url += '&filter_image=' + encodeURIComponent(filter_image);
   }
 
-	location = url;
+	location = 'index.php?route=catalog/product&token=<?php echo $token; ?>' + url;
 });
 //--></script>
   <script type="text/javascript"><!--

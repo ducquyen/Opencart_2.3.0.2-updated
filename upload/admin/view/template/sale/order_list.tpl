@@ -47,9 +47,9 @@
             <div class="col-sm-4">
               <div class="form-group">
                 <label class="control-label" for="input-order-status"><?php echo $entry_order_status; ?></label>
-                <select name="filter_order_status" id="input-order-status" class="form-control">
-                  <option value="*"></option>
-                  <?php if ($filter_order_status == '0') { ?>
+                <select name="filter_order_status_id" id="input-order-status" class="form-control">
+                  <option value=""></option>
+                  <?php if ($filter_order_status_id == '0') { ?>
                   <option value="0" selected="selected"><?php echo $text_missing; ?></option>
                   <?php } else { ?>
                   <option value="0"><?php echo $text_missing; ?></option>
@@ -165,7 +165,7 @@
   </div>
   <script type="text/javascript"><!--
 $('#button-filter').on('click', function() {
-	url = 'index.php?route=sale/order&token=<?php echo $token; ?>';
+	url = '';
 
 	var filter_order_id = $('input[name=\'filter_order_id\']').val();
 
@@ -179,10 +179,10 @@ $('#button-filter').on('click', function() {
 		url += '&filter_customer=' + encodeURIComponent(filter_customer);
 	}
 
-	var filter_order_status = $('select[name=\'filter_order_status\']').val();
+	var filter_order_status_id = $('select[name=\'filter_order_status_id\']').val();
 
-	if (filter_order_status != '*') {
-		url += '&filter_order_status=' + encodeURIComponent(filter_order_status);
+	if (filter_order_status_id !== '') {
+		url += '&filter_order_status_id=' + encodeURIComponent(filter_order_status_id);
 	}
 
 	var filter_total = $('input[name=\'filter_total\']').val();
@@ -203,7 +203,7 @@ $('#button-filter').on('click', function() {
 		url += '&filter_date_modified=' + encodeURIComponent(filter_date_modified);
 	}
 
-	location = url;
+	location = 'index.php?route=sale/order&token=<?php echo $token; ?>' + url;
 });
 //--></script> 
   <script type="text/javascript"><!--

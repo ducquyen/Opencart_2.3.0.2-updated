@@ -35,7 +35,7 @@ class ControllerCustomerCustomer extends Controller {
 			}
 
 			if (isset($this->request->get['filter_customer_group_id'])) {
-				$url .= '&filter_customer_group_id=' . $this->request->get['filter_customer_group_id'];
+				$url .= '&filter_customer_group_id=' . (int)$this->request->get['filter_customer_group_id'];
 			}
 
 			if (isset($this->request->get['filter_status'])) {
@@ -206,7 +206,7 @@ class ControllerCustomerCustomer extends Controller {
 		if (isset($this->request->post['selected'])) {
 			$customers = $this->request->post['selected'];
 		} elseif (isset($this->request->get['customer_id'])) {
-			$customers[] = $this->request->get['customer_id'];
+			$customers[] = (int)$this->request->get['customer_id'];
 		}
 
 		if ($customers && $this->validateApprove()) {
@@ -326,43 +326,43 @@ class ControllerCustomerCustomer extends Controller {
 		if (isset($this->request->get['filter_name'])) {
 			$filter_name = $this->request->get['filter_name'];
 		} else {
-			$filter_name = null;
+			$filter_name = '';
 		}
 
 		if (isset($this->request->get['filter_email'])) {
 			$filter_email = $this->request->get['filter_email'];
 		} else {
-			$filter_email = null;
+			$filter_email = '';
 		}
 
 		if (isset($this->request->get['filter_customer_group_id'])) {
-			$filter_customer_group_id = $this->request->get['filter_customer_group_id'];
+			$filter_customer_group_id = (int)$this->request->get['filter_customer_group_id'];
 		} else {
-			$filter_customer_group_id = null;
+			$filter_customer_group_id = '';
 		}
 
 		if (isset($this->request->get['filter_status'])) {
 			$filter_status = $this->request->get['filter_status'];
 		} else {
-			$filter_status = null;
+			$filter_status = '';
 		}
 
 		if (isset($this->request->get['filter_approved'])) {
 			$filter_approved = $this->request->get['filter_approved'];
 		} else {
-			$filter_approved = null;
+			$filter_approved = '';
 		}
 
 		if (isset($this->request->get['filter_ip'])) {
 			$filter_ip = $this->request->get['filter_ip'];
 		} else {
-			$filter_ip = null;
+			$filter_ip = '';
 		}
 
 		if (isset($this->request->get['filter_date_added'])) {
 			$filter_date_added = $this->request->get['filter_date_added'];
 		} else {
-			$filter_date_added = null;
+			$filter_date_added = '';
 		}
 
 		if (isset($this->request->get['sort'])) {
@@ -1142,7 +1142,7 @@ class ControllerCustomerCustomer extends Controller {
 
 	public function login() {
 		if (isset($this->request->get['customer_id'])) {
-			$customer_id = $this->request->get['customer_id'];
+			$customer_id = (int)$this->request->get['customer_id'];
 		} else {
 			$customer_id = 0;
 		}
@@ -1158,7 +1158,7 @@ class ControllerCustomerCustomer extends Controller {
 			$this->model_customer_customer->editToken($customer_id, $token);
 
 			if (isset($this->request->get['store_id'])) {
-				$store_id = $this->request->get['store_id'];
+				$store_id = (int)$this->request->get['store_id'];
 			} else {
 				$store_id = 0;
 			}
@@ -1502,7 +1502,7 @@ class ControllerCustomerCustomer extends Controller {
 
 		// Customer Group
 		if (isset($this->request->get['customer_group_id'])) {
-			$customer_group_id = $this->request->get['customer_group_id'];
+			$customer_group_id = (int)$this->request->get['customer_group_id'];
 		} else {
 			$customer_group_id = $this->config->get('config_customer_group_id');
 		}

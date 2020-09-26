@@ -37,82 +37,94 @@ class ControllerSaleOrder extends Controller {
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
-		$this->load->model('sale/order');
+		$this->session->data['success'] = $this->language->get('text_success');
 
-		if (isset($this->request->post['selected']) && $this->validate()) {
-			foreach ($this->request->post['selected'] as $order_id) {
-				$this->model_sale_order->deleteOrder($order_id);
-			}
+		$url = '';
 
-			$this->session->data['success'] = $this->language->get('text_success');
-
-			$url = '';
-
-			if (isset($this->request->get['filter_order_id'])) {
-				$url .= '&filter_order_id=' . $this->request->get['filter_order_id'];
-			}
-	
-			if (isset($this->request->get['filter_customer'])) {
-				$url .= '&filter_customer=' . urlencode(html_entity_decode($this->request->get['filter_customer'], ENT_QUOTES, 'UTF-8'));
-			}
-	
-			if (isset($this->request->get['filter_order_status'])) {
-				$url .= '&filter_order_status=' . $this->request->get['filter_order_status'];
-			}
-	
-			if (isset($this->request->get['filter_total'])) {
-				$url .= '&filter_total=' . $this->request->get['filter_total'];
-			}
-	
-			if (isset($this->request->get['filter_date_added'])) {
-				$url .= '&filter_date_added=' . $this->request->get['filter_date_added'];
-			}
-	
-			if (isset($this->request->get['filter_date_modified'])) {
-				$url .= '&filter_date_modified=' . $this->request->get['filter_date_modified'];
-			}
-
-			$this->response->redirect($this->url->link('sale/order', 'token=' . $this->session->data['token'] . $url, true));
+		if (isset($this->request->get['filter_order_id'])) {
+			$url .= '&filter_order_id=' . $this->request->get['filter_order_id'];
 		}
 
-		$this->getList();
+		if (isset($this->request->get['filter_customer'])) {
+			$url .= '&filter_customer=' . urlencode(html_entity_decode($this->request->get['filter_customer'], ENT_QUOTES, 'UTF-8'));
+		}
+
+		if (isset($this->request->get['filter_order_status'])) {
+			$url .= '&filter_order_status=' . $this->request->get['filter_order_status'];
+		}
+	
+		if (isset($this->request->get['filter_order_status_id'])) {
+			$url .= '&filter_order_status_id=' . $this->request->get['filter_order_status_id'];
+		}
+			
+		if (isset($this->request->get['filter_total'])) {
+			$url .= '&filter_total=' . $this->request->get['filter_total'];
+		}
+
+		if (isset($this->request->get['filter_date_added'])) {
+			$url .= '&filter_date_added=' . $this->request->get['filter_date_added'];
+		}
+
+		if (isset($this->request->get['filter_date_modified'])) {
+			$url .= '&filter_date_modified=' . $this->request->get['filter_date_modified'];
+		}
+
+		if (isset($this->request->get['sort'])) {
+			$url .= '&sort=' . $this->request->get['sort'];
+		}
+
+		if (isset($this->request->get['order'])) {
+			$url .= '&order=' . $this->request->get['order'];
+		}
+
+		if (isset($this->request->get['page'])) {
+			$url .= '&page=' . $this->request->get['page'];
+		}
+
+		$this->response->redirect($this->url->link('sale/order', 'user_token=' . $this->session->data['user_token'] . $url, true));
 	}
 	
 	protected function getList() {
 		if (isset($this->request->get['filter_order_id'])) {
-			$filter_order_id = $this->request->get['filter_order_id'];
+			$filter_order_id = (int)$this->request->get['filter_order_id'];
 		} else {
-			$filter_order_id = null;
+			$filter_order_id = '';
 		}
 
 		if (isset($this->request->get['filter_customer'])) {
 			$filter_customer = $this->request->get['filter_customer'];
 		} else {
-			$filter_customer = null;
+			$filter_customer = '';
 		}
 
 		if (isset($this->request->get['filter_order_status'])) {
 			$filter_order_status = $this->request->get['filter_order_status'];
 		} else {
-			$filter_order_status = null;
+			$filter_order_status = '';
+		}
+
+		if (isset($this->request->get['filter_order_status_id'])) {
+			$filter_order_status_id = (int)$this->request->get['filter_order_status_id'];
+		} else {
+			$filter_order_status_id = '';
 		}
 
 		if (isset($this->request->get['filter_total'])) {
 			$filter_total = $this->request->get['filter_total'];
 		} else {
-			$filter_total = null;
+			$filter_total = '';
 		}
 
 		if (isset($this->request->get['filter_date_added'])) {
 			$filter_date_added = $this->request->get['filter_date_added'];
 		} else {
-			$filter_date_added = null;
+			$filter_date_added = '';
 		}
 
 		if (isset($this->request->get['filter_date_modified'])) {
 			$filter_date_modified = $this->request->get['filter_date_modified'];
 		} else {
-			$filter_date_modified = null;
+			$filter_date_modified = '';
 		}
 
 		if (isset($this->request->get['sort'])) {
@@ -145,6 +157,10 @@ class ControllerSaleOrder extends Controller {
 
 		if (isset($this->request->get['filter_order_status'])) {
 			$url .= '&filter_order_status=' . $this->request->get['filter_order_status'];
+		}
+
+		if (isset($this->request->get['filter_order_status_id'])) {
+			$url .= '&filter_order_status_id=' . $this->request->get['filter_order_status_id'];
 		}
 
 		if (isset($this->request->get['filter_total'])) {
@@ -191,16 +207,17 @@ class ControllerSaleOrder extends Controller {
 		$data['orders'] = array();
 
 		$filter_data = array(
-			'filter_order_id'      => $filter_order_id,
-			'filter_customer'	   => $filter_customer,
-			'filter_order_status'  => $filter_order_status,
-			'filter_total'         => $filter_total,
-			'filter_date_added'    => $filter_date_added,
-			'filter_date_modified' => $filter_date_modified,
-			'sort'                 => $sort,
-			'order'                => $order,
-			'start'                => ($page - 1) * $this->config->get('config_limit_admin'),
-			'limit'                => $this->config->get('config_limit_admin')
+			'filter_order_id'        => $filter_order_id,
+			'filter_customer'	     => $filter_customer,
+			'filter_order_status'    => $filter_order_status,
+			'filter_order_status_id' => $filter_order_status_id,
+			'filter_total'           => $filter_total,
+			'filter_date_added'      => $filter_date_added,
+			'filter_date_modified'   => $filter_date_modified,
+			'sort'                   => $sort,
+			'order'                  => $order,
+			'start'                  => ($page - 1) * $this->config->get('config_limit_admin'),
+			'limit'                  => $this->config->get('config_limit_admin')
 		);
 
 		$order_total = $this->model_sale_order->getTotalOrders($filter_data);
@@ -289,6 +306,10 @@ class ControllerSaleOrder extends Controller {
 			$url .= '&filter_order_status=' . $this->request->get['filter_order_status'];
 		}
 
+		if (isset($this->request->get['filter_order_status_id'])) {
+			$url .= '&filter_order_status_id=' . $this->request->get['filter_order_status_id'];
+		}
+
 		if (isset($this->request->get['filter_total'])) {
 			$url .= '&filter_total=' . $this->request->get['filter_total'];
 		}
@@ -332,6 +353,10 @@ class ControllerSaleOrder extends Controller {
 			$url .= '&filter_order_status=' . $this->request->get['filter_order_status'];
 		}
 
+		if (isset($this->request->get['filter_order_status_id'])) {
+			$url .= '&filter_order_status_id=' . $this->request->get['filter_order_status_id'];
+		}
+
 		if (isset($this->request->get['filter_total'])) {
 			$url .= '&filter_total=' . $this->request->get['filter_total'];
 		}
@@ -365,6 +390,7 @@ class ControllerSaleOrder extends Controller {
 		$data['filter_order_id'] = $filter_order_id;
 		$data['filter_customer'] = $filter_customer;
 		$data['filter_order_status'] = $filter_order_status;
+		$data['filter_order_status_id'] = $filter_order_status_id;
 		$data['filter_total'] = $filter_total;
 		$data['filter_date_added'] = $filter_date_added;
 		$data['filter_date_modified'] = $filter_date_modified;
@@ -475,6 +501,10 @@ class ControllerSaleOrder extends Controller {
 			$url .= '&filter_order_status=' . $this->request->get['filter_order_status'];
 		}
 
+		if (isset($this->request->get['filter_order_status_id'])) {
+			$url .= '&filter_order_status_id=' . $this->request->get['filter_order_status_id'];
+		}
+
 		if (isset($this->request->get['filter_total'])) {
 			$url .= '&filter_total=' . $this->request->get['filter_total'];
 		}
@@ -520,7 +550,7 @@ class ControllerSaleOrder extends Controller {
 		}
 
 		if (!empty($order_info)) {
-			$data['order_id'] = $this->request->get['order_id'];
+			$data['order_id'] = (int)$this->request->get['order_id'];
 			$data['store_id'] = $order_info['store_id'];
 			$data['store_url'] = HTTP_CATALOG;
 
@@ -790,7 +820,7 @@ class ControllerSaleOrder extends Controller {
 			$data['text_invoice'] = $this->language->get('text_invoice');
 			$data['text_reward'] = $this->language->get('text_reward');
 			$data['text_affiliate'] = $this->language->get('text_affiliate');
-			$data['text_order'] = sprintf($this->language->get('text_order'), $this->request->get['order_id']);
+			$data['text_order'] = sprintf($this->language->get('text_order'), $order_id);
 			$data['text_payment_address'] = $this->language->get('text_payment_address');
 			$data['text_shipping_address'] = $this->language->get('text_shipping_address');
 			$data['text_comment'] = $this->language->get('text_comment');
@@ -848,6 +878,10 @@ class ControllerSaleOrder extends Controller {
 				$url .= '&filter_order_status=' . $this->request->get['filter_order_status'];
 			}
 
+			if (isset($this->request->get['filter_order_status_id'])) {
+				$url .= '&filter_order_status_id=' . $this->request->get['filter_order_status_id'];
+			}
+
 			if (isset($this->request->get['filter_total'])) {
 				$url .= '&filter_total=' . $this->request->get['filter_total'];
 			}
@@ -891,7 +925,7 @@ class ControllerSaleOrder extends Controller {
 
 			$data['token'] = $this->session->data['token'];
 
-			$data['order_id'] = $this->request->get['order_id'];
+			$data['order_id'] = (int)$this->request->get['order_id'];
 
 			$data['store_id'] = $order_info['store_id'];
 			$data['store_name'] = $order_info['store_name'];
@@ -1289,7 +1323,7 @@ class ControllerSaleOrder extends Controller {
 				if (is_file(DIR_CATALOG . 'controller/extension/payment/' . $order_info['payment_code'] . '.php')) {
 					$content = $this->load->controller('extension/payment/' . $order_info['payment_code'] . '/order');
 				} else {
-					$content = null;
+					$content = '';
 				}
 
 				if ($content) {
@@ -1368,7 +1402,7 @@ class ControllerSaleOrder extends Controller {
 			$json['error'] = $this->language->get('error_permission');
 		} elseif (isset($this->request->get['order_id'])) {
 			if (isset($this->request->get['order_id'])) {
-				$order_id = $this->request->get['order_id'];
+				$order_id = (int)$this->request->get['order_id'];
 			} else {
 				$order_id = 0;
 			}
@@ -1397,7 +1431,7 @@ class ControllerSaleOrder extends Controller {
 			$json['error'] = $this->language->get('error_permission');
 		} else {
 			if (isset($this->request->get['order_id'])) {
-				$order_id = $this->request->get['order_id'];
+				$order_id = (int)$this->request->get['order_id'];
 			} else {
 				$order_id = 0;
 			}
@@ -1432,7 +1466,7 @@ class ControllerSaleOrder extends Controller {
 			$json['error'] = $this->language->get('error_permission');
 		} else {
 			if (isset($this->request->get['order_id'])) {
-				$order_id = $this->request->get['order_id'];
+				$order_id = (int)$this->request->get['order_id'];
 			} else {
 				$order_id = 0;
 			}
@@ -1463,7 +1497,7 @@ class ControllerSaleOrder extends Controller {
 			$json['error'] = $this->language->get('error_permission');
 		} else {
 			if (isset($this->request->get['order_id'])) {
-				$order_id = $this->request->get['order_id'];
+				$order_id = (int)$this->request->get['order_id'];
 			} else {
 				$order_id = 0;
 			}
@@ -1498,7 +1532,7 @@ class ControllerSaleOrder extends Controller {
 			$json['error'] = $this->language->get('error_permission');
 		} else {
 			if (isset($this->request->get['order_id'])) {
-				$order_id = $this->request->get['order_id'];
+				$order_id = (int)$this->request->get['order_id'];
 			} else {
 				$order_id = 0;
 			}
@@ -1540,7 +1574,7 @@ class ControllerSaleOrder extends Controller {
 
 		$this->load->model('sale/order');
 
-		$results = $this->model_sale_order->getOrderHistories($this->request->get['order_id'], ($page - 1) * 10, 10);
+		$results = $this->model_sale_order->getOrderHistories($order_id, ($page - 1) * 10, 10);
 
 		foreach ($results as $result) {
 			$data['histories'][] = array(
@@ -1551,7 +1585,7 @@ class ControllerSaleOrder extends Controller {
 			);
 		}
 
-		$history_total = $this->model_sale_order->getTotalOrderHistories($this->request->get['order_id']);
+		$history_total = $this->model_sale_order->getTotalOrderHistories($order_id);
 
 		$pagination = new Pagination();
 		$pagination->total = $history_total;
@@ -1608,7 +1642,7 @@ class ControllerSaleOrder extends Controller {
 		if (isset($this->request->post['selected'])) {
 			$orders = $this->request->post['selected'];
 		} elseif (isset($this->request->get['order_id'])) {
-			$orders[] = $this->request->get['order_id'];
+			$orders[] = (int)$this->request->get['order_id'];
 		}
 
 		foreach ($orders as $order_id) {
@@ -1843,7 +1877,7 @@ class ControllerSaleOrder extends Controller {
 		if (isset($this->request->post['selected'])) {
 			$orders = $this->request->post['selected'];
 		} elseif (isset($this->request->get['order_id'])) {
-			$orders[] = $this->request->get['order_id'];
+			$orders[] = (int)$this->request->get['order_id'];
 		}
 
 		foreach ($orders as $order_id) {
@@ -1912,7 +1946,7 @@ class ControllerSaleOrder extends Controller {
 				$products = $this->model_sale_order->getOrderProducts($order_id);
 
 				foreach ($products as $product) {
-					$option_weight = '';
+					$option_weight = 0;
 
 					$product_info = $this->model_catalog_product->getProduct($product['product_id']);
 
@@ -1941,7 +1975,7 @@ class ControllerSaleOrder extends Controller {
 
 							$product_option_value_info = $this->model_catalog_product->getProductOptionValue($product['product_id'], $option['product_option_value_id']);
 
-							if ($product_option_value_info) {
+							if (!empty($product_option_value_info['weight'])) {
 								if ($product_option_value_info['weight_prefix'] == '+') {
 									$option_weight += $product_option_value_info['weight'];
 								} elseif ($product_option_value_info['weight_prefix'] == '-') {

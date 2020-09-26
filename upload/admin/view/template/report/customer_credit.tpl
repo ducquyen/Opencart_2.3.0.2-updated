@@ -86,7 +86,7 @@
   </div>
   <script type="text/javascript"><!--
 $('#button-filter').on('click', function() {
-  url = 'index.php?route=report/customer_credit&token=<?php echo $token; ?>';
+  url = '';
 
   var filter_customer = $('input[name=\'filter_customer\']').val();
 
@@ -106,7 +106,7 @@ $('#button-filter').on('click', function() {
     url += '&filter_date_end=' + encodeURIComponent(filter_date_end);
   }
 
-  location = url;
+  location = 'index.php?route=report/customer_credit&token=<?php echo $token; ?>' + url;
 });
 //--></script> 
   <script type="text/javascript"><!--

@@ -401,7 +401,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 			$this->load->language('extension/payment/pp_express_order');
 
 			if (isset($this->request->get['order_id'])) {
-				$order_id = $this->request->get['order_id'];
+				$order_id = (int)$this->request->get['order_id'];
 			} else {
 				$order_id = 0;
 			}
@@ -438,7 +438,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 
 				$data['token'] = $this->session->data['token'];
 
-				$data['order_id'] = $this->request->get['order_id'];
+				$data['order_id'] = (int)$this->request->get['order_id'];
 
 				$data['capture_status'] = $paypal_info['capture_status'];
 
@@ -479,7 +479,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 		$data['transactions'] = array();
 
 		if (isset($this->request->get['order_id'])) {
-			$order_id = $this->request->get['order_id'];
+			$order_id = (int)$this->request->get['order_id'];
 		} else {
 			$order_id = 0;
 		}
@@ -522,7 +522,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 			$this->load->model('extension/payment/pp_express');
 
 			if (isset($this->request->get['order_id'])) {
-				$order_id = $this->request->get['order_id'];
+				$order_id = (int)$this->request->get['order_id'];
 			} else {
 				$order_id = 0;
 			}
@@ -627,7 +627,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 		$data['action'] = $this->url->link('extension/payment/pp_express/doRefund', 'token=' . $this->session->data['token'], true);
 		$data['cancel'] = $this->url->link('extension/payment/pp_express', 'token=' . $this->session->data['token'], true);
 
-		$data['transaction_id'] = $this->request->get['transaction_id'];
+		$data['transaction_id'] = (int)$this->request->get['transaction_id'];
 
 		$this->load->model('extension/payment/pp_express');
 		$pp_transaction = $this->model_extension_payment_pp_express->getTransaction($this->request->get['transaction_id']);
@@ -759,7 +759,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 		$this->load->language('extension/payment/pp_express_order');
 
 		if (isset($this->request->get['order_id'])) {
-			$order_id = $this->request->get['order_id'];
+			$order_id = (int)$this->request->get['order_id'];
 		} else {
 			$order_id = 0;
 		}
@@ -821,7 +821,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 		$this->load->model('account/recurring');
 
 		if (isset($this->request->get['order_recurring_id'])) {
-			$order_recurring_id = $this->request->get['order_recurring_id'];
+			$order_recurring_id = (int)$this->request->get['order_recurring_id'];
 		} else {
 			$order_recurring_id = 0;
 		}
@@ -896,7 +896,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 		$this->load->language('extension/payment/pp_express');
 
 		if (isset($this->request->get['paypal_order_transaction_id'])) {
-			$paypal_order_transaction_id = $this->request->get['paypal_order_transaction_id'];
+			$paypal_order_transaction_id = (int)$this->request->get['paypal_order_transaction_id'];
 		} else {
 			$paypal_order_transaction_id = 0;
 		}

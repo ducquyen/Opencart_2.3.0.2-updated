@@ -59,7 +59,7 @@
               <div class="form-group">
                 <label class="control-label" for="input-return-status"><?php echo $entry_return_status; ?></label>
                 <select name="filter_return_status_id" id="input-return-status" class="form-control">
-                  <option value="*"></option>
+                  <option value=""></option>
                   <?php foreach ($return_statuses as $return_status) { ?>
                   <?php if ($return_status['return_status_id'] == $filter_return_status_id) { ?>
                   <option value="<?php echo $return_status['return_status_id']; ?>" selected="selected"><?php echo $return_status['name']; ?></option>
@@ -178,7 +178,7 @@
   </div>
   <script type="text/javascript"><!--
 $('#button-filter').on('click', function() {
-	url = 'index.php?route=sale/return&token=<?php echo $token; ?>';
+	url = '';
 	
 	var filter_return_id = $('input[name=\'filter_return_id\']').val();
 	
@@ -212,7 +212,7 @@ $('#button-filter').on('click', function() {
 		
 	var filter_return_status_id = $('select[name=\'filter_return_status_id\']').val();
 	
-	if (filter_return_status_id != '*') {
+	if (filter_return_status_id !== '') {
 		url += '&filter_return_status_id=' + encodeURIComponent(filter_return_status_id);
 	}	
 	
@@ -228,7 +228,7 @@ $('#button-filter').on('click', function() {
 		url += '&filter_date_modified=' + encodeURIComponent(filter_date_modified);
 	}
 			
-	location = url;
+	location = 'index.php?route=sale/return&token=<?php echo $token; ?>' + url;
 });
 //--></script> 
   <script type="text/javascript"><!--
@@ -297,4 +297,4 @@ $('.date').datetimepicker({
 	pickTime: false
 });
 //--></script></div>
-<?php echo $footer; ?> 
+<?php echo $footer; ?>

@@ -232,7 +232,7 @@ class ControllerExtensionPaymentKlarnaCheckout extends Controller {
 
 		$data['text_payment_info'] = $this->language->get('text_payment_info');
 		$data['token'] = $this->session->data['token'];
-		$data['order_id'] = $this->request->get['order_id'];
+		$data['order_id'] = (int)$this->request->get['order_id'];
 
 		return $this->load->view('extension/payment/klarna_checkout_order', $data);
 	}
@@ -357,7 +357,7 @@ class ControllerExtensionPaymentKlarnaCheckout extends Controller {
 
 		$data['order_ref'] = $order_reference['order_ref'];
 		$data['token'] = $this->session->data['token'];
-		$data['order_id'] = $this->request->get['order_id'];
+		$data['order_id'] = (int)$this->request->get['order_id'];
 
 		$extend_authorization_action = $cancel_action = $capture_action = $refund_action = $merchant_reference_action = $address_action = $release_authorization_action = false;
 

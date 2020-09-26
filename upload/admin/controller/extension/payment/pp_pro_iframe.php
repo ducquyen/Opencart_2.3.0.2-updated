@@ -305,7 +305,7 @@ class ControllerExtensionPaymentPPProIframe extends Controller {
 			$data['paypal_order'] = $paypal_order;
 			$data['token'] = $this->session->data['token'];
 
-			$data['order_id'] = $this->request->get['order_id'];
+			$data['order_id'] = (int)$this->request->get['order_id'];
 
 			$captured = number_format($this->model_extension_payment_pp_pro_iframe->getTotalCaptured($data['paypal_order']['paypal_iframe_order_id']), 2);
 			$refunded = number_format($this->model_extension_payment_pp_pro_iframe->getTotalRefunded($data['paypal_order']['paypal_iframe_order_id']), 2);
@@ -394,7 +394,7 @@ class ControllerExtensionPaymentPPProIframe extends Controller {
 			$data['cancel'] = '';
 		}
 
-		$data['transaction_id'] = $this->request->get['transaction_id'];
+		$data['transaction_id'] = (int)$this->request->get['transaction_id'];
 
 		$pp_transaction = $this->model_extension_payment_pp_pro_iframe->getTransaction($this->request->get['transaction_id']);
 

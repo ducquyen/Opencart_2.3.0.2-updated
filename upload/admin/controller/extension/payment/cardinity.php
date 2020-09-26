@@ -148,7 +148,7 @@ class ControllerExtensionPaymentCardinity extends Controller {
 
 		$data['text_payment_info'] = $this->language->get('text_payment_info');
 		$data['token'] = $this->session->data['token'];
-		$data['order_id'] = $this->request->get['order_id'];
+		$data['order_id'] = (int)$this->request->get['order_id'];
 
 		return $this->load->view('extension/payment/cardinity_order', $data);
 	}

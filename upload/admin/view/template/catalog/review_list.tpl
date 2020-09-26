@@ -45,13 +45,13 @@
               <div class="form-group">
                 <label class="control-label" for="input-status"><?php echo $entry_status; ?></label>
                 <select name="filter_status" id="input-status" class="form-control">
-                  <option value="*"></option>
-                  <?php if ($filter_status) { ?>
+                  <option value=""></option>
+                  <?php if ($filter_status == '1') { ?>
                   <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
                   <?php } else { ?>
                   <option value="1"><?php echo $text_enabled; ?></option>
                   <?php } ?>
-                  <?php if (!$filter_status && !is_null($filter_status)) { ?>
+                  <?php if ($filter_status == '0') { ?>
                   <option value="0" selected="selected"><?php echo $text_disabled; ?></option>
                   <?php } else { ?>
                   <option value="0"><?php echo $text_disabled; ?></option>
@@ -139,7 +139,7 @@
   </div>
   <script type="text/javascript"><!--
 $('#button-filter').on('click', function() {
-	url = 'index.php?route=catalog/review&token=<?php echo $token; ?>';
+	url = '';
 	
 	var filter_product = $('input[name=\'filter_product\']').val();
 	
@@ -155,7 +155,7 @@ $('#button-filter').on('click', function() {
 	
 	var filter_status = $('select[name=\'filter_status\']').val();
 	
-	if (filter_status != '*') {
+	if (filter_status !== '') {
 		url += '&filter_status=' + encodeURIComponent(filter_status); 
 	}		
 			
@@ -165,7 +165,7 @@ $('#button-filter').on('click', function() {
 		url += '&filter_date_added=' + encodeURIComponent(filter_date_added);
 	}
 
-	location = url;
+	location = 'index.php?route=catalog/review&token=<?php echo $token; ?>' + url;
 });
 //--></script> 
   <script type="text/javascript"><!--

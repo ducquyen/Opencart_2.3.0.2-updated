@@ -322,7 +322,7 @@ class ControllerExtensionPaymentPilibaba extends Controller {
 
 				$data['barcode'] = $this->url->link('extension/payment/pilibaba/barcode', 'token=' . $this->session->data['token'] . '&order_id=' . $this->request->get['order_id'], true);
 
-				$data['order_id'] = $this->request->get['order_id'];
+				$data['order_id'] = (int)$this->request->get['order_id'];
 
 				$data['token'] = $this->session->data['token'];
 

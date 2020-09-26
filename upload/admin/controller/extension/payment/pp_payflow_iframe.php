@@ -449,7 +449,7 @@ class ControllerExtensionPaymentPPPayflowIframe extends Controller {
 		$this->load->model('extension/payment/pp_payflow_iframe');
 		$this->load->language('extension/payment/pp_payflow_iframe');
 
-		$order_id = $this->request->get['order_id'];
+		$order_id = (int)$this->request->get['order_id'];
 
 		$paypal_order = $this->model_extension_payment_pp_payflow_iframe->getOrder($order_id);
 
@@ -476,7 +476,7 @@ class ControllerExtensionPaymentPPPayflowIframe extends Controller {
 			$data['button_void'] = $this->language->get('button_void');
 
 			$data['complete'] = $paypal_order['complete'];
-			$data['order_id'] = $this->request->get['order_id'];
+			$data['order_id'] = (int)$this->request->get['order_id'];
 			$data['token'] = $this->session->data['token'];
 
 			$data['transactions'] = array();

@@ -115,7 +115,7 @@
   </div>
   <script type="text/javascript"><!--
 $('#button-filter').on('click', function() {
-	url = 'index.php?route=marketing/marketing&token=<?php echo $token; ?>';
+	url = '';
 	
 	var filter_name = $('input[name=\'filter_name\']').val();
 	
@@ -135,7 +135,7 @@ $('#button-filter').on('click', function() {
 		url += '&filter_date_added=' + encodeURIComponent(filter_date_added);
 	}
 	
-	location = url;
+	location = 'index.php?route=marketing/marketing&token=<?php echo $token; ?>' + url;
 });
 //--></script> 
   <script type="text/javascript"><!--

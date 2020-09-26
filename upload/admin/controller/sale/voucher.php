@@ -312,7 +312,7 @@ class ControllerSaleVoucher extends Controller {
 		$data['tab_history'] = $this->language->get('tab_history');
 
 		if (isset($this->request->get['voucher_id'])) {
-			$data['voucher_id'] = $this->request->get['voucher_id'];
+			$data['voucher_id'] = (int)$this->request->get['voucher_id'];
 		} else {
 			$data['voucher_id'] = 0;
 		}

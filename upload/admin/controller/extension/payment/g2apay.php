@@ -268,7 +268,7 @@ class ControllerExtensionPaymentG2APay extends Controller {
 				$data['btn_refund'] = $this->language->get('btn_refund');
 				$data['text_confirm_refund'] = $this->language->get('text_confirm_refund');
 
-				$data['order_id'] = $this->request->get['order_id'];
+				$data['order_id'] = (int)$this->request->get['order_id'];
 				$data['token'] = $this->session->data['token'];
 
 				return $this->load->view('extension/payment/g2apay_order', $data);

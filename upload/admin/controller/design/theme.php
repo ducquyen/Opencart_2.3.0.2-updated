@@ -61,7 +61,7 @@ class ControllerDesignTheme extends Controller {
 		$json = array();
 		
 		if (isset($this->request->get['store_id'])) {
-			$store_id = $this->request->get['store_id'];			
+			$store_id = (int)$this->request->get['store_id'];			
 		} else {
 			$store_id = 0;
 		}	
@@ -127,7 +127,7 @@ class ControllerDesignTheme extends Controller {
 		$json = array();
 		
 		if (isset($this->request->get['store_id'])) {
-			$store_id = $this->request->get['store_id'];			
+			$store_id = (int)$this->request->get['store_id'];			
 		} else {
 			$store_id = 0;
 		}	
@@ -169,7 +169,7 @@ class ControllerDesignTheme extends Controller {
 		$json = array();
 		
 		if (isset($this->request->get['store_id'])) {
-			$store_id = $this->request->get['store_id'];			
+			$store_id = (int)$this->request->get['store_id'];			
 		} else {
 			$store_id = 0;
 		}	
@@ -212,7 +212,7 @@ class ControllerDesignTheme extends Controller {
 		$json = array();
 		
 		if (isset($this->request->get['store_id'])) {
-			$store_id = $this->request->get['store_id'];			
+			$store_id = (int)$this->request->get['store_id'];			
 		} else {
 			$store_id = 0;
 		}	

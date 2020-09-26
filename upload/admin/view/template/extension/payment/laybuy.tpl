@@ -270,7 +270,7 @@
 				    <div class="form-group">
 	                  <label class="control-label" for="input-status"><?php echo $entry_status; ?></label>
 	                  <select name="filter_status" id="input-status" class="form-control" />
-	                    <option value="*"></option>
+	                    <option value=""></option>
 	                    <?php foreach ($transaction_statuses as $transaction_status) { ?>
 					      <?php if ($transaction_status['status_id'] == $filter_status) { ?>
 					        <option value="<?php echo $transaction_status['status_id']; ?>" selected="selected"><?php echo $transaction_status['status_name']; ?></option>
@@ -521,7 +521,7 @@ $('#button-filter').on('click', function() {
 
 	var filter_status = $('select[name=\'filter_status\']').val();
 
-	if (filter_status != '*') {
+	if (filter_status !== '') {
 		url += '&filter_status=' + encodeURIComponent(filter_status);
 	}
 

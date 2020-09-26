@@ -335,7 +335,7 @@ class ControllerExtensionPaymentFirstdata extends Controller {
 				$data['text_confirm_void'] = $this->language->get('text_confirm_void');
 				$data['text_confirm_capture'] = $this->language->get('text_confirm_capture');
 
-				$data['order_id'] = $this->request->get['order_id'];
+				$data['order_id'] = (int)$this->request->get['order_id'];
 				$data['token'] = $this->session->data['token'];
 
 				return $this->load->view('extension/payment/firstdata_order', $data);

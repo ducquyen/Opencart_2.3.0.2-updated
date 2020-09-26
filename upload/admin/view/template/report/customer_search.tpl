@@ -96,7 +96,7 @@
   </div>
   <script type="text/javascript"><!--
 $('#button-filter').on('click', function() {
-	url = 'index.php?route=report/customer_search&token=<?php echo $token; ?>';
+	url = '';
 
   var filter_date_start = $('input[name=\'filter_date_start\']').val();
 
@@ -128,7 +128,7 @@ $('#button-filter').on('click', function() {
 		url += '&filter_ip=' + encodeURIComponent(filter_ip);
 	}
 
-	location = url;
+	location = 'index.php?route=report/customer_search&token=<?php echo $token; ?>' + url;
 });
 //--></script> 
   <script type="text/javascript"><!--
