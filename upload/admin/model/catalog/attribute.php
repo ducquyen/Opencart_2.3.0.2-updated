@@ -45,15 +45,15 @@ class ModelCatalogAttribute extends Model {
 		}
 
 		$sort_data = array(
-			'ad.`name`',
+			'ad.name',
 			'attribute_group',
-			'a.`sort_order`'
+			'a.sort_order'
 		);
 
 		if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
 			$sql .= " ORDER BY " . $data['sort'];
 		} else {
-			$sql .= " ORDER BY attribute_group, ad.name";
+			$sql .= " ORDER BY `attribute_group`, ad.`name`";
 		}
 
 		if (isset($data['order']) && ($data['order'] == 'DESC')) {
@@ -92,13 +92,13 @@ class ModelCatalogAttribute extends Model {
 	}
 
 	public function getTotalAttributes() {
-		$query = $this->db->query("SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "attribute`");
+		$query = $this->db->query("SELECT COUNT(*) AS `total` FROM `" . DB_PREFIX . "attribute`");
 
 		return $query->row['total'];
 	}
 
 	public function getTotalAttributesByAttributeGroupId($attribute_group_id) {
-		$query = $this->db->query("SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "attribute` WHERE `attribute_group_id` = '" . (int)$attribute_group_id . "'");
+		$query = $this->db->query("SELECT COUNT(*) AS `total` FROM `" . DB_PREFIX . "attribute` WHERE `attribute_group_id` = '" . (int)$attribute_group_id . "'");
 
 		return $query->row['total'];
 	}

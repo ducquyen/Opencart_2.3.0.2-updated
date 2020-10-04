@@ -128,7 +128,7 @@ class ModelCatalogFilter extends Model {
 			$sql .= " AND fd.`name` LIKE '" . $this->db->escape((string)$data['filter_name']) . "%'";
 		}
 
-		$sql .= " ORDER BY f.sort_order ASC";
+		$sql .= " ORDER BY f.`sort_order` ASC";
 
 		if (isset($data['start']) || isset($data['limit'])) {
 			if ($data['start'] < 0) {
@@ -172,7 +172,7 @@ class ModelCatalogFilter extends Model {
 	}
 
 	public function getTotalFilterGroups() {
-		$query = $this->db->query("SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "filter_group`");
+		$query = $this->db->query("SELECT COUNT(*) AS `total` FROM `" . DB_PREFIX . "filter_group`");
 
 		return $query->row['total'];
 	}
