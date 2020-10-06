@@ -81,7 +81,7 @@ class ControllerSaleOrder extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$this->response->redirect($this->url->link('sale/order', 'user_token=' . $this->session->data['user_token'] . $url, true));
+		$this->response->redirect($this->url->link('sale/order', 'token=' . $this->session->data['token'] . $url, true));
 	}
 	
 	protected function getList() {
@@ -201,8 +201,8 @@ class ControllerSaleOrder extends Controller {
 
 		$data['invoice'] = $this->url->link('sale/order/invoice', 'token=' . $this->session->data['token'], true);
 		$data['shipping'] = $this->url->link('sale/order/shipping', 'token=' . $this->session->data['token'], true);
-		$data['add'] = $this->url->link('sale/order/add', 'token=' . $this->session->data['token'], true);
-		$data['delete'] = $this->url->link('sale/order/delete', 'token=' . $this->session->data['token'], true);
+		$data['add'] = $this->url->link('sale/order/add', 'token=' . $this->session->data['token'] . $url, true);
+		$data['delete'] = str_replace('&amp;', '&', $this->url->link('sale/order/delete', 'token=' . $this->session->data['token'] . $url, true));
 
 		$data['orders'] = array();
 
@@ -764,13 +764,14 @@ class ControllerSaleOrder extends Controller {
 
 		// API login
 		$data['catalog'] = HTTP_CATALOG;
-		
+
+		// API login
 		$this->load->model('user/api');
 
 		$api_info = $this->model_user_api->getApi($this->config->get('config_api_id'));
 
 		if ($api_info) {
-			
+
 			$data['api_id'] = $api_info['api_id'];
 			$data['api_key'] = $api_info['key'];
 			$data['api_ip'] = $this->request->server['REMOTE_ADDR'];
@@ -1398,15 +1399,15 @@ class ControllerSaleOrder extends Controller {
 
 		$json = array();
 
+		if (isset($this->request->get['order_id'])) {
+			$order_id = (int)$this->request->get['order_id'];
+		} else {
+			$order_id = 0;
+		}
+
 		if (!$this->user->hasPermission('modify', 'sale/order')) {
 			$json['error'] = $this->language->get('error_permission');
-		} elseif (isset($this->request->get['order_id'])) {
-			if (isset($this->request->get['order_id'])) {
-				$order_id = (int)$this->request->get['order_id'];
-			} else {
-				$order_id = 0;
-			}
-
+		} else {
 			$this->load->model('sale/order');
 
 			$invoice_no = $this->model_sale_order->createInvoiceNo($order_id);
@@ -1427,15 +1428,15 @@ class ControllerSaleOrder extends Controller {
 
 		$json = array();
 
+		if (isset($this->request->get['order_id'])) {
+			$order_id = (int)$this->request->get['order_id'];
+		} else {
+			$order_id = 0;
+		}
+
 		if (!$this->user->hasPermission('modify', 'sale/order')) {
 			$json['error'] = $this->language->get('error_permission');
 		} else {
-			if (isset($this->request->get['order_id'])) {
-				$order_id = (int)$this->request->get['order_id'];
-			} else {
-				$order_id = 0;
-			}
-
 			$this->load->model('sale/order');
 
 			$order_info = $this->model_sale_order->getOrder($order_id);
@@ -1462,15 +1463,15 @@ class ControllerSaleOrder extends Controller {
 
 		$json = array();
 
+		if (isset($this->request->get['order_id'])) {
+			$order_id = (int)$this->request->get['order_id'];
+		} else {
+			$order_id = 0;
+		}
+
 		if (!$this->user->hasPermission('modify', 'sale/order')) {
 			$json['error'] = $this->language->get('error_permission');
 		} else {
-			if (isset($this->request->get['order_id'])) {
-				$order_id = (int)$this->request->get['order_id'];
-			} else {
-				$order_id = 0;
-			}
-
 			$this->load->model('sale/order');
 
 			$order_info = $this->model_sale_order->getOrder($order_id);
@@ -1493,15 +1494,15 @@ class ControllerSaleOrder extends Controller {
 
 		$json = array();
 
+		if (isset($this->request->get['order_id'])) {
+			$order_id = (int)$this->request->get['order_id'];
+		} else {
+			$order_id = 0;
+		}
+
 		if (!$this->user->hasPermission('modify', 'sale/order')) {
 			$json['error'] = $this->language->get('error_permission');
 		} else {
-			if (isset($this->request->get['order_id'])) {
-				$order_id = (int)$this->request->get['order_id'];
-			} else {
-				$order_id = 0;
-			}
-
 			$this->load->model('sale/order');
 
 			$order_info = $this->model_sale_order->getOrder($order_id);
@@ -1528,15 +1529,15 @@ class ControllerSaleOrder extends Controller {
 
 		$json = array();
 
+		if (isset($this->request->get['order_id'])) {
+			$order_id = (int)$this->request->get['order_id'];
+		} else {
+			$order_id = 0;
+		}
+
 		if (!$this->user->hasPermission('modify', 'sale/order')) {
 			$json['error'] = $this->language->get('error_permission');
 		} else {
-			if (isset($this->request->get['order_id'])) {
-				$order_id = (int)$this->request->get['order_id'];
-			} else {
-				$order_id = 0;
-			}
-
 			$this->load->model('sale/order');
 
 			$order_info = $this->model_sale_order->getOrder($order_id);
@@ -1557,18 +1558,24 @@ class ControllerSaleOrder extends Controller {
 	public function history() {
 		$this->load->language('sale/order');
 
-		$data['text_no_results'] = $this->language->get('text_no_results');
-
-		$data['column_date_added'] = $this->language->get('column_date_added');
-		$data['column_status'] = $this->language->get('column_status');
-		$data['column_notify'] = $this->language->get('column_notify');
-		$data['column_comment'] = $this->language->get('column_comment');
+		if (isset($this->request->get['order_id'])) {
+			$order_id = (int)$this->request->get['order_id'];
+		} else {
+			$order_id = 0;
+		}
 
 		if (isset($this->request->get['page'])) {
 			$page = (int)$this->request->get['page'];
 		} else {
 			$page = 1;
 		}
+
+		$data['text_no_results'] = $this->language->get('text_no_results');
+
+		$data['column_date_added'] = $this->language->get('column_date_added');
+		$data['column_status'] = $this->language->get('column_status');
+		$data['column_notify'] = $this->language->get('column_notify');
+		$data['column_comment'] = $this->language->get('column_comment');
 
 		$data['histories'] = array();
 
