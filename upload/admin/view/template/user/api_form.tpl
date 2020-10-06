@@ -84,7 +84,7 @@
                     <?php foreach ($api_ips as $api_ip) { ?>
                     <tr id="ip-row<?php echo $ip_row; ?>">
                       <td class="text-left"><input type="text" name="api_ip[]" value="<?php echo $api_ip['ip']; ?>" placeholder="<?php echo $entry_ip; ?>" class="form-control" /></td>
-                      <td class="text-left"><button type="button" onclick="$('#ip-row<?php echo $ip_row; ?>').remove()" data-toggle="tooltip" title="<?php echo $button_remove; ?>" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>
+                      <td class="text-right"><button type="button" onclick="$('#ip-row<?php echo $ip_row; ?>').remove()" data-toggle="tooltip" title="<?php echo $button_remove; ?>" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>
                     </tr>
                     <?php $ip_row++; ?>
                     <?php } ?>
@@ -92,7 +92,7 @@
                   <tfoot>
                     <tr>
                       <td></td>
-                      <td class="text-left"><button type="button" onclick="addIp()" data-toggle="tooltip" title="<?php echo $button_ip_add; ?>" class="btn btn-primary"><i class="fa fa-plus-circle"></i></button></td>
+                      <td class="text-right"><button type="button" onclick="addIp()" data-toggle="tooltip" title="<?php echo $button_ip_add; ?>" class="btn btn-primary"><i class="fa fa-plus-circle"></i></button></td>
                     </tr>
                   </tfoot>
                 </table>
@@ -152,7 +152,7 @@ var ip_row = <?php echo $ip_row; ?>;
 function addIp() {
 	html  = '<tr id="ip-row' + ip_row + '">';
     html += '  <td class="text-right"><input type="text" name="api_ip[]" value="" placeholder="<?php echo $entry_ip; ?>" class="form-control" /></td>';
-	html += '  <td class="text-left"><button type="button" onclick="$(\'#ip-row' + ip_row + '\').remove();" data-toggle="tooltip" title="<?php echo $button_remove; ?>" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>';
+	html += '  <td class="text-right"><button type="button" onclick="$(\'#ip-row' + ip_row + '\').remove();" data-toggle="tooltip" title="<?php echo $button_remove; ?>" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>';
 	html += '</tr>';
 
 	$('#ip tbody').append(html);
@@ -165,17 +165,17 @@ $('#session button').on('click', function(e) {
 	e.preventDefault();
 
 	if (confirm('<?php echo $text_confirm; ?>')) {
-		var node = this;
+		var element = this;
 
 		$.ajax({
-			url: 'index.php?route=user/api/deletesession&token=<?php echo $token; ?>&api_session_id=' + $(node).val(),
+			url: 'index.php?route=user/api/deletesession&token=<?php echo $token; ?>&api_session_id=' + $(element).val(),
 			type: 'post',
 			dataType: 'json',
 			beforeSend: function() {
-				$(node).button('loading');
+				$(element).button('loading');
 			},
 			complete: function() {
-				$(node).button('reset');
+				$(element).button('reset');
 			},
 			success: function(json) {
 				$('.alert').remove();
@@ -187,7 +187,7 @@ $('#session button').on('click', function(e) {
 				if (json['success']) {
 					$('#tab-session').prepend('<div class="alert alert-success"><i class="fa fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
 
-					$(node).parent().parent().remove();
+					$(element).parent().parent().remove();
 				}
 			},
 			error: function(xhr, ajaxOptions, thrownError) {
