@@ -791,7 +791,7 @@ class ControllerSaleOrder extends Controller {
 			$data['text_invoice'] = $this->language->get('text_invoice');
 			$data['text_reward'] = $this->language->get('text_reward');
 			$data['text_affiliate'] = $this->language->get('text_affiliate');
-			$data['text_order'] = sprintf($this->language->get('text_order'), $order_id);
+			$data['text_order'] = sprintf($this->language->get('text_order'), $this->request->get['order_id']);
 			$data['text_payment_address'] = $this->language->get('text_payment_address');
 			$data['text_shipping_address'] = $this->language->get('text_shipping_address');
 			$data['text_comment'] = $this->language->get('text_comment');
@@ -1541,7 +1541,7 @@ class ControllerSaleOrder extends Controller {
 
 		$this->load->model('sale/order');
 
-		$results = $this->model_sale_order->getOrderHistories($order_id, ($page - 1) * 10, 10);
+		$results = $this->model_sale_order->getOrderHistories($this->request->get['order_id'], ($page - 1) * 10, 10);
 
 		foreach ($results as $result) {
 			$data['histories'][] = array(
@@ -1552,7 +1552,7 @@ class ControllerSaleOrder extends Controller {
 			);
 		}
 
-		$history_total = $this->model_sale_order->getTotalOrderHistories($order_id);
+		$history_total = $this->model_sale_order->getTotalOrderHistories($this->request->get['order_id']);
 
 		$pagination = new Pagination();
 		$pagination->total = $history_total;
