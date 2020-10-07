@@ -338,13 +338,13 @@ class ControllerCustomerCustomer extends Controller {
 		if (isset($this->request->get['filter_customer_group_id'])) {
 			$filter_customer_group_id = (int)$this->request->get['filter_customer_group_id'];
 		} else {
-			$filter_customer_group_id = '';
+			$filter_customer_group_id = 0;
 		}
 
 		if (isset($this->request->get['filter_status'])) {
 			$filter_status = $this->request->get['filter_status'];
 		} else {
-			$filter_status = '';
+			$filter_status = 1;
 		}
 
 		if (isset($this->request->get['filter_approved'])) {
