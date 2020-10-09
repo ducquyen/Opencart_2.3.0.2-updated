@@ -46,7 +46,7 @@ $_['session_name']         = 'PHPSESSID';
 $_['template_type']        = 'php';
 
 // Error
-$_['config_error_display'] = true;
+$_['config_error_display'] = true; // You need to change this to false on a live site.
 $_['config_error_log']     = true;
 $_['config_error_filename'] = 'error.log';
 
