@@ -33,3 +33,7 @@ For Cron module
 $_['text_cron']                      = 'Cron Jobs';
 
 - Copy cron.php from admin/language/en-gb/extension in the same location of your language.
+
+## Patching standard version of Opencart 2.3.0.2
+
+- If you had standard Opencart 2.3.0.2 and you have replaced with this version then you need to create in Database "oc_cron" table from opencart.sql
