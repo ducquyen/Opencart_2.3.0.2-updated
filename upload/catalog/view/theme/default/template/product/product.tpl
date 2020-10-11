@@ -538,7 +538,7 @@ $('button[id^=\'button-upload\']').on('click', function() {
 });
 //--></script>
 <script type="text/javascript"><!--
-$('#review').delegate('.pagination a', 'click', function(e) {
+$('#review').on('click', '.pagination a', function(e) {
     e.preventDefault();
 
     $('#review').fadeOut('slow');

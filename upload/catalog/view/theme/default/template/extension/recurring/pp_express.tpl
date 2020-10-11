@@ -7,7 +7,7 @@
   <div class="pull-right"><a href="<?php echo $continue; ?>" data-loading-text="<?php echo $text_loading; ?>" class="btn btn-primary"><?php echo $button_continue; ?></a></div>
 </div>
 <script type="text/javascript"><!--
-$(document).delegate('#button-cancel', 'click', function() { 
+$(document).on('click', '#button-cancel', function() { 
     $.ajax({
         url: 'index.php?route=extension/recurring/pp_express/cancel',
 		dataType: 'json',

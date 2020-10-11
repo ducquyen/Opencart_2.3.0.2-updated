@@ -140,7 +140,7 @@ $(document).ready(function() {
 <?php } ?>
 
 // Checkout
-$(document).delegate('#button-account', 'click', function() {
+$(document).on('click', '#button-account', function() {
     $.ajax({
         url: 'index.php?route=checkout/' + $('input[name=\'account\']:checked').val(),
         dataType: 'html',
@@ -170,7 +170,7 @@ $(document).delegate('#button-account', 'click', function() {
 });
 
 // Login
-$(document).delegate('#button-login', 'click', function() {
+$(document).on('click', '#button-login', function() {
     $.ajax({
         url: 'index.php?route=checkout/login/save',
         type: 'post',
@@ -203,7 +203,7 @@ $(document).delegate('#button-login', 'click', function() {
 });
 
 // Register
-$(document).delegate('#button-register', 'click', function() {
+$(document).on('click', '#button-register', function() {
     $.ajax({
         url: 'index.php?route=checkout/register/save',
         type: 'post',
@@ -337,7 +337,7 @@ $(document).delegate('#button-register', 'click', function() {
 });
 
 // Payment Address
-$(document).delegate('#button-payment-address', 'click', function() {
+$(document).on('click', '#button-payment-address', function() {
     $.ajax({
         url: 'index.php?route=checkout/payment_address/save',
         type: 'post',
@@ -429,7 +429,7 @@ $(document).delegate('#button-payment-address', 'click', function() {
 });
 
 // Shipping Address
-$(document).delegate('#button-shipping-address', 'click', function() {
+$(document).on('click', '#button-shipping-address', function() {
     $.ajax({
         url: 'index.php?route=checkout/shipping_address/save',
         type: 'post',
@@ -514,7 +514,7 @@ $(document).delegate('#button-shipping-address', 'click', function() {
 });
 
 // Guest
-$(document).delegate('#button-guest', 'click', function() {
+$(document).on('click', '#button-guest', function() {
     $.ajax({
         url: 'index.php?route=checkout/guest/save',
         type: 'post',
@@ -639,7 +639,7 @@ $(document).delegate('#button-guest', 'click', function() {
 });
 
 // Guest Shipping
-$(document).delegate('#button-guest-shipping', 'click', function() {
+$(document).on('click', '#button-guest-shipping', function() {
     $.ajax({
         url: 'index.php?route=checkout/guest_shipping/save',
         type: 'post',
@@ -701,7 +701,7 @@ $(document).delegate('#button-guest-shipping', 'click', function() {
     });
 });
 
-$(document).delegate('#button-shipping-method', 'click', function() {
+$(document).on('click', '#button-shipping-method', function() {
     $.ajax({
         url: 'index.php?route=checkout/shipping_method/save',
         type: 'post',
@@ -749,7 +749,7 @@ $(document).delegate('#button-shipping-method', 'click', function() {
     });
 });
 
-$(document).delegate('#button-payment-method', 'click', function() {
+$(document).on('click', '#button-payment-method', function() {
     $.ajax({
         url: 'index.php?route=checkout/payment_method/save',
         type: 'post',
