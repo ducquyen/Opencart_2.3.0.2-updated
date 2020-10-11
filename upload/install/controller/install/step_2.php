@@ -54,6 +54,72 @@ class ControllerInstallStep2 extends Controller {
 
 		$data['action'] = $this->url->link('install/step_2');
 
+		// catalog config
+		if (!is_file(DIR_OPENCART . 'config.php')) {
+			$data['error_catalog_config'] = $this->language->get('error_missing');
+		} elseif (!is_writable(DIR_OPENCART . 'config.php')) {
+			$data['error_catalog_config'] = $this->language->get('error_unwritable');
+		} else {
+			$data['error_catalog_config'] = '';
+		}
+
+		// admin configs
+		if (!is_file(DIR_OPENCART . 'admin/config.php')) {
+			$data['error_admin_config'] = $this->language->get('error_missing');
+		} elseif (!is_writable(DIR_OPENCART . 'admin/config.php')) {
+			$data['error_admin_config'] = $this->language->get('error_unwritable');
+		} else {
+			$data['error_admin_config'] = '';
+		}
+ 
+		if (!is_writable(DIR_OPENCART . 'image/')) {
+			$data['error_image'] = $this->language->get('error_unwritable');
+		} else {
+			$data['error_image'] = '';
+		}
+
+		if (!is_writable(DIR_OPENCART . 'image/cache/')) {
+			$data['error_image_cache'] = $this->language->get('error_unwritable');
+		} else {
+			$data['error_image_cache'] = '';
+		}
+
+		if (!is_writable(DIR_OPENCART . 'image/catalog/')) {
+			$data['error_image_catalog'] = $this->language->get('error_unwritable');
+		} else {
+			$data['error_image_catalog'] = '';
+		}
+
+		if (!is_writable(DIR_SYSTEM . 'storage/cache/')) {
+			$data['error_cache'] = $this->language->get('error_unwritable');
+		} else {
+			$data['error_cache'] = '';
+		}
+
+		if (!is_writable(DIR_SYSTEM . 'storage/logs/')) {
+			$data['error_logs'] = $this->language->get('error_unwritable');
+		} else {
+			$data['error_logs'] = '';
+		}
+
+		if (!is_writable(DIR_SYSTEM . 'storage/download/')) {
+			$data['error_download'] = $this->language->get('error_unwritable');
+		} else {
+			$data['error_download'] = '';
+		}
+
+		if (!is_writable(DIR_SYSTEM . 'storage/upload/')) {
+			$data['error_upload'] = $this->language->get('error_unwritable');
+		} else {
+			$data['error_upload'] = '';
+		}
+
+		if (!is_writable(DIR_SYSTEM . 'storage/modification/')) {
+			$data['error_modification'] = $this->language->get('error_unwritable');
+		} else {
+			$data['error_modification'] = '';
+		}
+
 		$data['php_version'] = phpversion();
 
 		if (version_compare(phpversion(), '7.0.0', '<')) {
@@ -87,8 +153,8 @@ class ControllerInstallStep2 extends Controller {
 		$data['iconv'] = function_exists('iconv');
 		$data['mbstring'] = extension_loaded('mbstring');
 
-		$data['config_catalog'] = DIR_OPENCART . 'config.php';
-		$data['config_admin'] = DIR_OPENCART . 'admin/config.php';
+		$data['catalog_config'] = DIR_OPENCART . 'config.php';
+		$data['admin_config'] = DIR_OPENCART . 'admin/config.php';
 		
 		$data['image'] = DIR_OPENCART . 'image';
 		$data['image_cache'] = DIR_OPENCART . 'image/cache';

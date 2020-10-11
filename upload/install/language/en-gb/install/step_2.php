@@ -33,10 +33,12 @@ $_['text_on']                = 'On';
 $_['text_off']               = 'Off';
 $_['text_writable']          = 'Writable';
 $_['text_unwritable']        = 'Unwritable';
-$_['text_missing']           = 'Missing';
+//$_['text_missing']           = 'Missing';
 
 // Error
-$_['error_version']          = 'Warning: You need to use PHP 7+ or above for OpenCart to work!';
+$_['error_missing']          = 'Missing';
+$_['error_unwritable']       = 'Unwritable';
+$_['error_version']          = 'Warning: You need to use PHP 7.0 + or above for OpenCart to work!';
 $_['error_file_upload']      = 'Warning: file_uploads needs to be enabled!';
 $_['error_session']          = 'Warning: OpenCart will not work with session.auto_start enabled!';
 $_['error_db']               = 'Warning: A database extension needs to be loaded in the php.ini for OpenCart to work!';
@@ -54,7 +56,7 @@ $_['error_image']            = 'Warning: Image directory needs to be writable fo
 $_['error_image_cache']      = 'Warning: Image cache directory needs to be writable for OpenCart to work!';
 $_['error_image_catalog']    = 'Warning: Image catalog directory needs to be writable for OpenCart to work!';
 $_['error_cache']            = 'Warning: Cache directory needs to be writable for OpenCart to work!';
-$_['error_log']              = 'Warning: Logs directory needs to be writable for OpenCart to work!';
+$_['error_logs']             = 'Warning: Logs directory needs to be writable for OpenCart to work!';
 $_['error_download']         = 'Warning: Download directory needs to be writable for OpenCart to work!';
 $_['error_upload']           = 'Warning: Upload directory needs to be writable for OpenCart to work!';
 $_['error_modification']     = 'Warning: Modification directory needs to be writable for OpenCart to work!';

@@ -227,23 +227,19 @@
             </thead>
             <tbody>
               <tr>
-                <td><?php echo $config_catalog; ?></td>
-                <td><?php if (!file_exists($config_catalog)) { ?>
-                  <span class="text-danger"><?php echo $text_missing; ?></span>
-                  <?php } elseif (!is_writable($config_catalog)) { ?>
-                  <span class="text-danger"><?php echo $text_unwritable; ?></span>
-                  <?php } else { ?>
+                <td><?php echo $catalog_config; ?></td>
+                <td><?php if (!$error_catalog_config) { ?>
                   <span class="text-success"><?php echo $text_writable; ?></span>
+                  <?php } else { ?>
+                  <span class="text-danger"><?php echo $error_catalog_config; ?></span>
                   <?php } ?></td>
               </tr>
               <tr>
-                <td><?php echo $config_admin; ?></td>
-                <td><?php if (!file_exists($config_admin)) { ?>
-                  <span class="text-danger"><?php echo $text_missing; ?></span>
-                  <?php } elseif (!is_writable($config_admin)) { ?>
-                  <span class="text-danger"><?php echo $text_unwritable; ?></span>
-                  <?php } else { ?>
+                <td><?php echo $admin_config; ?></td>
+                <td><?php if (!$error_admin_config) { ?>
                   <span class="text-success"><?php echo $text_writable; ?></span>
+                  <?php } else { ?>
+                  <span class="text-danger"><?php echo $error_admin_config; ?></span>
                   <?php } ?></td>
               </tr>
             </tbody>
