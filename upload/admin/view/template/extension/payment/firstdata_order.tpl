@@ -90,13 +90,13 @@
   <input type="hidden" name="order_id" value="<?php echo $order_id; ?>"/>
 </form>
 <script type="text/javascript"><!--
-$("#button-void").bind('click', function () {
+$("#button-void").on('click', function () {
   if (confirm('<?php echo $text_confirm_void; ?>')) {
     $('#voidform').submit();
   }
 });
 
-$("#button_capture").bind('click', function () {
+$("#button_capture").on('click', function () {
   if (confirm('<?php echo $text_confirm_capture; ?>')) {
     $('#captureform').submit();
   }

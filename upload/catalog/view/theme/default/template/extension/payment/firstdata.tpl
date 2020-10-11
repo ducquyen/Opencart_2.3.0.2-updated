@@ -52,7 +52,7 @@
 </div>
 
 <script type="text/javascript"><!--
-$('#button-confirm').bind('click', function() {
+$('#button-confirm').on('click', function() {
   $('#firstdata_form_redirect').submit();
 });
 //--></script>

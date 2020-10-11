@@ -394,7 +394,7 @@
     <?php echo $column_right; ?></div>
 </div>
 <script type="text/javascript"><!--
-$('select[name=\'recurring_id\'], input[name="quantity"]').change(function(){
+$('select[name=\'recurring_id\'], input[name="quantity"]').on('change', function(){
 	$.ajax({
 		url: 'index.php?route=product/product/getRecurringDescription',
 		type: 'post',

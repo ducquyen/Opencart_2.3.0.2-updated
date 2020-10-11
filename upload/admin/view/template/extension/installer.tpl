@@ -162,7 +162,7 @@ function next() {
 	}
 }
 
-$('#button-clear').bind('click', function() {
+$('#button-clear').on('click', function() {
 	$.ajax({
 		url: 'index.php?route=extension/installer/clear&token=<?php echo $token; ?>',
 		dataType: 'json',

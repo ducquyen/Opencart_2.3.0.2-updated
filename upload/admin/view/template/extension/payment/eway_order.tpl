@@ -55,7 +55,7 @@
 </table>
 
 <script type="text/javascript"><!--
-	$("#btn-refund").bind('click', function () {
+	$("#btn-refund").on('click', function () {
 		if ($('#eway-refund-amount').val() != '' && confirm('<?php echo $text_confirm_refund; ?>')) {
 			$.ajax({
 				type:'POST',
@@ -109,7 +109,7 @@
 //-->
 </script>
 <script type="text/javascript"><!--
-	$("#btn-capture").bind('click', function () {
+	$("#btn-capture").on('click', function () {
 		if ($('#eway-capture-amount').val() != '' && confirm('<?php echo $text_confirm_capture; ?>')) {
 			$.ajax({
 				type:'POST',

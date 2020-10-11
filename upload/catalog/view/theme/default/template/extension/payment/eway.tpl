@@ -122,7 +122,7 @@
 	    }
 	//--></script>
 	<script type="text/javascript"><!--
-	$('#button-confirm').bind('click', function () {
+	$('#button-confirm').on('click', function () {
 
 	      if ($('#eway-radio-cc').is(':checked')) {
 	        var eway_error = false;

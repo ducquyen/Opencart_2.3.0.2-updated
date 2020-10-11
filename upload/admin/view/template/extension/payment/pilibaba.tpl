@@ -204,7 +204,7 @@
 </div>
 
 <script type="text/javascript"><!--
-	$('#input-pilibaba-warehouse').change(function() {
+	$('#input-pilibaba-warehouse').on('change', function() {
 		var value = $(this).val();
 
 		if (value == 'other') {

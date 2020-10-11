@@ -93,7 +93,7 @@
 </div>
 
 <script type="text/javascript"><!--
-$('#klarna-shipping-method input[type=\'radio\'], #confirm-shipping input[type=\'radio\']').change(function() {
+$('#klarna-shipping-method input[type=\'radio\'], #confirm-shipping input[type=\'radio\']').on('change', function() {
 	window._klarnaCheckout(function(api) {
 		addSidebarOverlay();
 		api.suspend();

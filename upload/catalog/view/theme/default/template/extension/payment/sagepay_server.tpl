@@ -85,7 +85,7 @@
 	});
 //</script>
 <script type="text/javascript"><!--
-    $('#button-confirm').bind('click', function() {
+    $('#button-confirm').on('click', function() {
 		$.ajax({
 			url: 'index.php?route=extension/payment/sagepay_server/send',
 			type: 'post',
@@ -121,7 +121,7 @@
 	});
 //--></script>
 <script type="text/javascript"><!--
-    $('#button-delete').bind('click', function () {
+    $('#button-delete').on('click', function () {
       if (confirm('<?php echo $text_confirm_delete; ?>')) {
         $.ajax({
           url: 'index.php?route=extension/payment/sagepay_server/delete',

@@ -124,7 +124,7 @@
 </div>
 <?php echo $footer; ?>
 <script type="text/javascript"><!--
-$('input[name=\'shipping_method\']').change(function() {
+$('input[name=\'shipping_method\']').on('change', function() {
 	$('#shipping_form').submit();
 });
 

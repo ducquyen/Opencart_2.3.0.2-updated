@@ -163,7 +163,7 @@
     <?php echo $column_right; ?></div>
 </div>
 <script type="text/javascript"><!--
-$('#button-search').bind('click', function() {
+$('#button-search').on('click', function() {
 	url = 'index.php?route=product/search';
 
 	var search = $('#content input[name=\'search\']').prop('value');

@@ -327,7 +327,7 @@
       });
       //</script>
   <script type="text/javascript">
-      $('input[name=\'amazon_login_pay_ipn_token\']').change(function () {
+      $('input[name=\'amazon_login_pay_ipn_token\']').on('change', function () {
         $('#input-ipn-url').val('<?php echo HTTPS_CATALOG; ?>index.php?route=extension/payment/amazon_login_pay/ipn&token=' + $(this).val());
       });
       //</script>

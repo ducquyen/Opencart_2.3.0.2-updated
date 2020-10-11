@@ -671,7 +671,7 @@ JQVMap.prototype.makeDraggable = function () {
 
     return false;
 
-  }).mousedown(function (e) {
+  }).on('mousedown', function (e) {
 
     mouseDown = true;
     oldPageX = e.pageX;
@@ -679,7 +679,7 @@ JQVMap.prototype.makeDraggable = function () {
 
     return false;
 
-  }).mouseup(function () {
+  }).on('mouseup', function () {
 
     mouseDown = false;
 
@@ -690,7 +690,7 @@ JQVMap.prototype.makeDraggable = function () {
 
     return false;
 
-  }).mouseout(function () {
+  }).on('mouseout', function () {
 
     if(mouseDown && self.isMoving){
 

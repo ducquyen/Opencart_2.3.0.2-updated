@@ -4,7 +4,7 @@ $(document).ready(function() {
 		var element = this;
 		
 		if ($(this).attr('data-lang')) {
-			$('head').append('<script type="text/javascript" src="view/javascript/summernote/lang/summernote-' + $(this).attr('data-lang') + '.js"></script>');
+			$('head').append('<script src="view/javascript/summernote/lang/summernote-' + $(this).attr('data-lang') + '.js"></script>');
 		}
 
 		$(element).summernote({

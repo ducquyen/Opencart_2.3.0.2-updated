@@ -146,7 +146,7 @@ $('input[name="card_new"]').on('change', function() {
 //--></script>
 
 <script type="text/javascript"><!--
-$('#button-delete').bind('click', function() {
+$('#button-delete').on('click', function() {
 	if (confirm('<?php echo $text_confirm_delete; ?>')) {
 		$.ajax({
 			url: 'index.php?route=extension/payment/cardconnect/delete',
@@ -186,7 +186,7 @@ $('#button-delete').bind('click', function() {
 //--></script>
 
 <script type="text/javascript"><!--
-$('#button-confirm').bind('click', function() {
+$('#button-confirm').on('click', function() {
 	$.ajax({
 		url: 'index.php?route=extension/payment/cardconnect/send',
 		type: 'post',

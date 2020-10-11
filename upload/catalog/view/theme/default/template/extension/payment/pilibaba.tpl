@@ -31,7 +31,7 @@
   </div>
 
   <script type="text/javascript"><!--
-  $('#button-confirm').bind('click', function() {
+  $('#button-confirm').on('click', function() {
 	$('#button-confirm').button('loading');
 
     $('#pilibaba-form').submit();
