@@ -101,7 +101,7 @@
 
 
 
-		$('#confirm-button').click(function() {
+		$('#confirm-button').on('click', function() {
 			if ($(this).attr('disabled') != 'disabled') {
 				$('.payment-form').submit();
 			}

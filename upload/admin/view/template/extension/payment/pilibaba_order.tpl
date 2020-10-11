@@ -32,7 +32,7 @@
   </tr>
 </table>
 <script type="text/javascript"><!--
-	$('#button-tracking').click(function() {
+	$('#button-tracking').on('click', function() {
 		if (confirm('<?php echo $text_confirm; ?>')) {
 			$.ajax({
 				type: 'POST',

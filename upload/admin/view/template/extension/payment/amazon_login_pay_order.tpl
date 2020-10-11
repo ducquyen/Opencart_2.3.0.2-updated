@@ -93,7 +93,7 @@
   </tr>
 </table>
 <script type="text/javascript"><!--
-  $("#button-cancel").click(function () {
+  $("#button-cancel").on('click', function () {
       if (confirm('<?php echo $text_confirm_cancel; ?>')) {
         $.ajax({
           type: 'POST',
@@ -137,7 +137,7 @@
         });
       }
     });
-    $("#button-capture").click(function () {
+    $("#button-capture").on('click', function () {
       if (confirm('<?php echo $text_confirm_capture; ?>')) {
         $.ajax({
           type: 'POST',
@@ -192,7 +192,7 @@
         });
       }
     });
-    $("#button-refund").click(function () {
+    $("#button-refund").on('click', function () {
       if (confirm('<?php echo $text_confirm_refund; ?>')) {
         $.ajax({
           type: 'POST',

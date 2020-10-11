@@ -106,14 +106,14 @@
       
       <script>
 	$(document).ready(function(){
-		$("#button-flp-approve").click(function(){
+		$("#button-flp-approve").on('click', function(){
 			$("#new_status").val("APPROVE");
 			$("#review-action").submit();
 		});
 	});
 	
 	$(document).ready(function(){
-		$("#button-flp-reject").click(function(){
+		$("#button-flp-reject").on('click', function(){
 			$("#new_status").val("REJECT");
 			$("#review-action").submit();
 		});

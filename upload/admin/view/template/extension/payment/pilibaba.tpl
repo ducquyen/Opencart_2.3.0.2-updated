@@ -214,7 +214,7 @@
 		}
 	});
 
-	$('#button-register').click(function() {
+	$('#button-register').on('click', function() {
 		$.ajax({
 			type: 'POST',
 			dataType: 'json',

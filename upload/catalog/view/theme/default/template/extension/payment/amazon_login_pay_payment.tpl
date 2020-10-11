@@ -28,7 +28,7 @@
 	$(document).ready(function() {
 		amazon.Login.setClientId('<?php echo $amazon_login_pay_client_id; ?>');
 
-		$('#continue-button').click(function() {
+		$('#continue-button').on('click', function() {
 			$('div.warning').remove();
 
 			if ($("input[name='payment_method']").val() == '1') {

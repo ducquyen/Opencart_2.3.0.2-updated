@@ -31,7 +31,7 @@
 $(document).ready(function() {
 		amazon.Login.setClientId('<?php echo $amazon_login_pay_client_id; ?>');
 
-		$('#continue-button').click(function() {
+		$('#continue-button').on('click', function() {
 			$('div.warning').remove();
 			if ($('input[name="addressSelected"]').val() == '0') {
 				$('#addressBookWidgetDiv').before('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i><?php echo $error_shipping_address; ?></div>');

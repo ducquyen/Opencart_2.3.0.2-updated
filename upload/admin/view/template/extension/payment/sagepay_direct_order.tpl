@@ -70,7 +70,7 @@
   </tr>
 </table>
 <script type="text/javascript"><!--
-  $("#button-void").click(function() {
+  $("#button-void").on('click', function() {
 		if (confirm('<?php echo $text_confirm_void; ?>')) {
 			$.ajax({
 				type: 'POST',
@@ -110,7 +110,7 @@
 			});
 		}
 	});
-	$("#button-release").click(function() {
+	$("#button-release").on('click', function() {
 		if (confirm('<?php echo $text_confirm_release; ?>')) {
 			$.ajax({
 				type: 'POST',
@@ -165,7 +165,7 @@
 			});
 		}
 	});
-	$("#button-rebate").click(function() {
+	$("#button-rebate").on('click', function() {
 		if (confirm('<?php echo $text_confirm_rebate; ?>')) {
 			$.ajax({
 				type: 'POST',

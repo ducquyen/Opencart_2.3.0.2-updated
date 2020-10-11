@@ -71,15 +71,15 @@
   </tr>
 </table>
 <script type="text/javascript"><!--
-	$('#button-inquire-all').click(function() {
+	$('#button-inquire-all').on('click', function() {
 		$('.button-inquire').trigger('click');
 	});
 
-	$('#button-void-all').click(function() {
+	$('#button-void-all').on('click', function() {
 		$('.button-void').trigger('click');
 	});
 
-	$('#button-capture').click(function() {
+	$('#button-capture').on('click', function() {
 		if (confirm('<?php echo $text_confirm_capture; ?>')) {
 			$.ajax({
 				type: 'POST',
@@ -128,7 +128,7 @@
 		}
 	});
 
-	$('#button-refund').click(function() {
+	$('#button-refund').on('click', function() {
 		if (confirm('<?php echo $text_confirm_refund; ?>')) {
 			$.ajax({
 				type: 'POST',
