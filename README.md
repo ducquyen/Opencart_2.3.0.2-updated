@@ -13,6 +13,10 @@ OpenCart is a free open source ecommerce platform for online merchants. OpenCart
 - Integrated Timezone from Master Branch - 3.1.0.0b
 - Added Show/Hide password. Code used from <a href="https://github.com/opencartbrasil/opencartbrasil">Opencart Brasil</a>
 - Integrated Cron module from Master Branch - 3.1.0.0b
+- Added vendor folder for some payments
+- Bootstrap 3.4.1
+- jQuery 3.5.1
+
 
 ## Language patch for non English
 
