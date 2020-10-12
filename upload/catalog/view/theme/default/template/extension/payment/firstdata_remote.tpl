@@ -121,7 +121,7 @@ $('#button-confirm').on('click', function () {
   });
 });
 
-$(' . stored_card').bind('change', function () {
+$(' . stored_card').on('change', function () {
   if ($(this).val() == 'new') {
     $('#card_info').slideDown();
   } else {

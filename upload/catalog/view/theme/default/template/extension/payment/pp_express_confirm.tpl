@@ -128,7 +128,7 @@ $('input[name=\'shipping_method\']').on('change', function() {
 	$('#shipping_form').submit();
 });
 
-$('input[name=\'next\']').bind('change', function() {
+$('input[name=\'next\']').on('change', function() {
 	$('.cart-discounts > div').hide();
 
 	$('#' + this.value).show();

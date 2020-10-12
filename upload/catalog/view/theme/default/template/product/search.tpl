@@ -193,7 +193,7 @@ $('#button-search').on('click', function() {
 	location = url;
 });
 
-$('#content input[name=\'search\']').bind('keydown', function(e) {
+$('#content input[name=\'search\']').on('keydown', function(e) {
 	if (e.keyCode == 13) {
 		$('#button-search').trigger('click');
 	}
