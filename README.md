@@ -22,21 +22,21 @@ OpenCart is a free open source ecommerce platform for online merchants. OpenCart
 
 <b>Currency module and Timezone</b>
 
-- Edit admin/language/your_language/setting.php and add this values:
+- Edit <b>admin/language/your_language/setting.php</b> and add this values:
 
 $_['entry_timezone']               = 'Time Zone';\
 $_['entry_currency_engine']        = 'Currency Rate Engine';
 
-- Copy currency.php from admin/language/en-gb/extension/extension in the same location of your language.
-- Copy currency folder from admin/language/en-gb/extension/ in the same location of your language.
+- Copy <b>currency.php</b> from <b>admin/language/en-gb/extension/extension</b> in the same location of your language.
+- Copy <b>currency</b> folder from <b>admin/language/en-gb/extension/</b> in the same location of your language.
 
 <b>Cron module</b>
 
-- Edit admin/language/your_language/column_left.php and add this value:
+- Edit <b>admin/language/your_language/column_left.php</b> and add this value:
 
 $_['text_cron']                      = 'Cron Jobs';
 
-- Copy cron.php from admin/language/en-gb/extension in the same location of your language.
+- Copy <b>cron.php from admin/language/en-gb/extension</b> in the same location of your language.
 
 ## Patching standard version of Opencart 2.3.0.2
 
