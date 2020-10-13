@@ -2,19 +2,22 @@
 namespace DB;
 final class MySQLi {
 	private $connection;
-	private $connected;
 
 	public function __construct($hostname, $username, $password, $database, $port = '3306') {
-		try {
-			mysqli_report(MYSQLI_REPORT_STRICT);
+		$connection = new \MySQLi($hostname, $username, $password, $database, $port);
 
-			$this->connection = @new \mysqli($hostname, $username, $password, $database, $port);
-		} catch (\mysqli_sql_exception $e) {
-			throw new \Exception('Error: Could not make a database link using ' . $username . '@' . $hostname . '!');
+		if (!$connection->connect_error) {
+			$this->connection = $connection;
+
+			$this->connection->report_mode = MYSQLI_REPORT_STRICT;
+
+			$this->connection->set_charset('utf8');
+
+			//register_shutdown_function([$this, 'close']);
+		} else {
+			error_log('Error: Could not make a database link using ' . $username . '@' . $hostname . '!');
+			exit();
 		}
-
-		$this->connection->set_charset("utf8");
-		$this->connection->query("SET SQL_MODE = ''");
 	}
 
 	public function query($sql) {
@@ -22,7 +25,7 @@ final class MySQLi {
 
 		if (!$this->connection->errno) {
 			if ($query instanceof \mysqli_result) {
-				$data = array();
+				$data = [];
 
 				while ($row = $query->fetch_assoc()) {
 					$data[] = $row;
@@ -30,7 +33,7 @@ final class MySQLi {
 
 				$result = new \stdClass();
 				$result->num_rows = $query->num_rows;
-				$result->row = isset($data[0]) ? $data[0] : array();
+				$result->row = isset($data[0]) ? $data[0] : [];
 				$result->rows = $data;
 
 				$query->close();
@@ -40,7 +43,7 @@ final class MySQLi {
 				return true;
 			}
 		} else {
-			throw new \Exception('Error: ' . $this->connection->connect_error  . '<br />Error No: ' . $this->connection->connect_error . '<br />' . $sql);
+			throw new \Exception('Error: ' . $this->connection->connect_error  . '<br />Error No: ' . $this->connection->connect_errno . '<br />' . $sql);
 		}
 	}
 
@@ -60,9 +63,13 @@ final class MySQLi {
 		return $this->connection->ping();
 	}
 	
-	public function __destruct() {
-		if ($this->connection) {
+	public function close() {
+		if (!$this->connection) {
 			$this->connection->close();
 		}
+	}
+
+	public function __destruct() {
+		$this->close();
 	}
 }
