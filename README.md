@@ -20,7 +20,7 @@ OpenCart is a free open source ecommerce platform for online merchants. OpenCart
 
 ## Language patch for non English
 
-For Currency module and Timezone
+<b>Currency module and Timezone</b>
 
 - Edit admin/language/your_language/setting.php and add this values:
 
@@ -30,7 +30,7 @@ $_['entry_currency_engine']        = 'Currency Rate Engine';
 - Copy currency.php from admin/language/en-gb/extension/extension in the same location of your language.
 - Copy currency folder from admin/language/en-gb/extension/ in the same location of your language.
 
-For Cron module
+<b>Cron module</b>
 
 - Edit admin/language/your_language/column_left.php and add this value:
 
@@ -40,11 +40,11 @@ $_['text_cron']                      = 'Cron Jobs';
 
 ## Patching standard version of Opencart 2.3.0.2
 
-Cron Module
+<b>Cron Module</b>
 
 - If you had standard Opencart 2.3.0.2 and you have replaced with this version then you need to create in Database "oc_cron" table from opencart.sql
 
-Admin config
+<b>Admin config</b>
 
 Replace old structure
 
@@ -80,7 +80,7 @@ define('DIR_MODIFICATION', DIR_STORAGE . 'modification/');<br>
 define('DIR_SESSION', DIR_STORAGE . 'session/');<br>
 define('DIR_UPLOAD', DIR_STORAGE . 'upload/');<br>
 
-Catalog config
+<b>Catalog config</b>
 
 Replace old structure
 
