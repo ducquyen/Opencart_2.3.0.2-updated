@@ -163,6 +163,7 @@ $('#button-upload').on('click', function() {
 
 $('#button-folder').popover({
 	html: true,
+	sanitize: false,
 	placement: 'bottom',
 	trigger: 'click',
 	title: '<?php echo $entry_folder; ?>',
