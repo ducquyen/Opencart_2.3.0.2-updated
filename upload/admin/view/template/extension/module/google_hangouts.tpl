@@ -25,8 +25,9 @@
       </div>
       <div class="panel-body">
         <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form-google-hangouts" class="form-horizontal">
+          <div class="alert alert-info"><i class="fa fa-info-circle"></i> <?php echo $help_code; ?></div>
           <div class="form-group required">
-            <label class="col-sm-2 control-label" for="input-code"><span data-toggle="tooltip" data-html="true" data-trigger="click" title="<?php echo htmlspecialchars($help_code); ?>"><?php echo $entry_code; ?></span></label>
+            <label class="col-sm-2 control-label" for="input-code"><?php echo $entry_code; ?></label>
             <div class="col-sm-10">
               <textarea name="google_hangouts_code" rows="5" id="input-code" class="form-control"><?php echo $google_hangouts_code; ?></textarea>
               <?php if ($error_code) { ?>
