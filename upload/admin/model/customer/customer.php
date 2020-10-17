@@ -79,42 +79,36 @@ class ModelCustomerCustomer extends Model {
 	public function getCustomers($data = array()) {
 		$sql = "SELECT *, CONCAT(c.firstname, ' ', c.lastname) AS name, cgd.name AS customer_group FROM " . DB_PREFIX . "customer c LEFT JOIN " . DB_PREFIX . "customer_group_description cgd ON (c.customer_group_id = cgd.customer_group_id) WHERE cgd.language_id = '" . (int)$this->config->get('config_language_id') . "'";
 
-		$implode = array();
-
 		if (!empty($data['filter_name'])) {
-			$implode[] = "CONCAT(c.firstname, ' ', c.lastname) LIKE '%" . $this->db->escape($data['filter_name']) . "%'";
+			$sql .= " AND CONCAT(c.firstname, ' ', c.lastname) LIKE '%" . $this->db->escape($data['filter_name']) . "%'";
 		}
 
 		if (!empty($data['filter_email'])) {
-			$implode[] = "c.email LIKE '" . $this->db->escape($data['filter_email']) . "%'";
+			$sql .= " AND c.email LIKE '" . $this->db->escape($data['filter_email']) . "%'";
 		}
 
 		if (isset($data['filter_newsletter']) && $data['filter_newsletter'] !== '') {
-			$implode[] = "c.newsletter = '" . (int)$data['filter_newsletter'] . "'";
+			$sql .= " AND c.newsletter = '" . (int)$data['filter_newsletter'] . "'";
 		}
 
 		if (!empty($data['filter_customer_group_id'])) {
-			$implode[] = "c.customer_group_id = '" . (int)$data['filter_customer_group_id'] . "'";
+			$sql .= " AND c.customer_group_id = '" . (int)$data['filter_customer_group_id'] . "'";
 		}
 
 		if (!empty($data['filter_ip'])) {
-			$implode[] = "c.customer_id IN (SELECT customer_id FROM " . DB_PREFIX . "customer_ip WHERE ip = '" . $this->db->escape($data['filter_ip']) . "')";
+			$sql .= " AND c.customer_id IN (SELECT customer_id FROM " . DB_PREFIX . "customer_ip WHERE ip = '" . $this->db->escape($data['filter_ip']) . "')";
 		}
 
-		if (isset($data['filter_status']) && (int)$data['filter_status'] !== '') {
-			$implode[] = "c.status = '" . (int)$data['filter_status'] . "'";
+		if (isset($data['filter_status']) && $data['filter_status'] !== '') {
+			$sql .= " AND c.status = '" . (int)$data['filter_status'] . "'";
 		}
 
 		if (isset($data['filter_approved']) && $data['filter_approved'] !== '') {
-			$implode[] = "c.approved = '" . (int)$data['filter_approved'] . "'";
+			$sql .= " AND c.approved = '" . (int)$data['filter_approved'] . "'";
 		}
 
 		if (!empty($data['filter_date_added'])) {
-			$implode[] = "DATE(c.date_added) = DATE('" . $this->db->escape($data['filter_date_added']) . "')";
-		}
-
-		if ($implode) {
-			$sql .= " AND " . implode(" AND ", $implode);
+			$sql .= " AND DATE(c.date_added) = DATE('" . $this->db->escape($data['filter_date_added']) . "')";
 		}
 
 		$sort_data = array(
@@ -281,7 +275,7 @@ class ModelCustomerCustomer extends Model {
 	}
 
 	public function getTotalCustomers($data = array()) {
-		$sql = "SELECT COUNT(*) AS total FROM " . DB_PREFIX . "customer";
+		$sql = "SELECT COUNT(*) AS total FROM " . DB_PREFIX . "customer c";
 
 		$implode = array();
 
