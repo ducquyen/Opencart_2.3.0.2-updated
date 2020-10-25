@@ -1233,7 +1233,7 @@ class ControllerCustomerCustomer extends Controller {
 		$pagination = new Pagination();
 		$pagination->total = $history_total;
 		$pagination->page = $page;
-		$pagination->limit = 10;
+		$pagination->limit = $this->config->get('config_limit_admin');
 		$pagination->url = $this->url->link('customer/customer/history', 'token=' . $this->session->data['token'] . '&customer_id=' . $this->request->get['customer_id'] . '&page={page}', true);
 
 		$data['pagination'] = $pagination->render();
@@ -1299,7 +1299,7 @@ class ControllerCustomerCustomer extends Controller {
 		$pagination = new Pagination();
 		$pagination->total = $transaction_total;
 		$pagination->page = $page;
-		$pagination->limit = 10;
+		$pagination->limit = $this->config->get('config_limit_admin');
 		$pagination->url = $this->url->link('customer/customer/transaction', 'token=' . $this->session->data['token'] . '&customer_id=' . $this->request->get['customer_id'] . '&page={page}', true);
 
 		$data['pagination'] = $pagination->render();
@@ -1365,7 +1365,7 @@ class ControllerCustomerCustomer extends Controller {
 		$pagination = new Pagination();
 		$pagination->total = $reward_total;
 		$pagination->page = $page;
-		$pagination->limit = 10;
+		$pagination->limit = $this->config->get('config_limit_admin');
 		$pagination->url = $this->url->link('customer/customer/reward', 'token=' . $this->session->data['token'] . '&customer_id=' . $this->request->get['customer_id'] . '&page={page}', true);
 
 		$data['pagination'] = $pagination->render();
@@ -1429,7 +1429,7 @@ class ControllerCustomerCustomer extends Controller {
 		$pagination = new Pagination();
 		$pagination->total = $ip_total;
 		$pagination->page = $page;
-		$pagination->limit = 10;
+		$pagination->limit = $this->config->get('config_limit_admin');
 		$pagination->url = $this->url->link('customer/customer/ip', 'token=' . $this->session->data['token'] . '&customer_id=' . $this->request->get['customer_id'] . '&page={page}', true);
 
 		$data['pagination'] = $pagination->render();
