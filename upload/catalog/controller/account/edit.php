@@ -69,7 +69,7 @@ class ControllerAccountEdit extends Controller {
 		$data['entry_telephone'] = $this->language->get('entry_telephone');
 		$data['entry_fax'] = $this->language->get('entry_fax');
 
-		$data['button_continue'] = $this->language->get('button_continue');
+		$data['button_save'] = $this->language->get('button_save');
 		$data['button_back'] = $this->language->get('button_back');
 		$data['button_upload'] = $this->language->get('button_upload');
 

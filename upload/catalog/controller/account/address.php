@@ -312,7 +312,7 @@ class ControllerAccountAddress extends Controller {
 		$data['entry_zone'] = $this->language->get('entry_zone');
 		$data['entry_default'] = $this->language->get('entry_default');
 
-		$data['button_continue'] = $this->language->get('button_continue');
+		$data['button_save'] = $this->language->get('button_save');
 		$data['button_back'] = $this->language->get('button_back');
 		$data['button_upload'] = $this->language->get('button_upload');
 

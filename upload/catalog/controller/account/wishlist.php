@@ -54,9 +54,9 @@ class ControllerAccountWishList extends Controller {
 		$data['column_price'] = $this->language->get('column_price');
 		$data['column_action'] = $this->language->get('column_action');
 
-		$data['button_continue'] = $this->language->get('button_continue');
 		$data['button_cart'] = $this->language->get('button_cart');
 		$data['button_remove'] = $this->language->get('button_remove');
+		$data['button_back'] = $this->language->get('button_back');
 
 		if (isset($this->session->data['success'])) {
 			$data['success'] = $this->session->data['success'];
@@ -116,7 +116,7 @@ class ControllerAccountWishList extends Controller {
 			}
 		}
 
-		$data['continue'] = $this->url->link('account/account', '', true);
+		$data['back'] = $this->url->link('account/account', '', true);
 
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['column_right'] = $this->load->controller('common/column_right');

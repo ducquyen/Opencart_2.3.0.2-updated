@@ -46,7 +46,7 @@ class ControllerAccountOrder extends Controller {
 		$data['column_date_added'] = $this->language->get('column_date_added');
 
 		$data['button_view'] = $this->language->get('button_view');
-		$data['button_continue'] = $this->language->get('button_continue');
+		$data['button_back'] = $this->language->get('button_back');
 
 		if (isset($this->request->get['page'])) {
 			$page = (int)$this->request->get['page'];
@@ -87,7 +87,7 @@ class ControllerAccountOrder extends Controller {
 
 		$data['results'] = sprintf($this->language->get('text_pagination'), ($order_total) ? (($page - 1) * 10) + 1 : 0, ((($page - 1) * 10) > ($order_total - 10)) ? $order_total : ((($page - 1) * 10) + 10), $order_total, ceil($order_total / 10));
 
-		$data['continue'] = $this->url->link('account/account', '', true);
+		$data['back'] = $this->url->link('account/account', '', true);
 
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['column_right'] = $this->load->controller('common/column_right');
@@ -175,7 +175,7 @@ class ControllerAccountOrder extends Controller {
 
 			$data['button_reorder'] = $this->language->get('button_reorder');
 			$data['button_return'] = $this->language->get('button_return');
-			$data['button_continue'] = $this->language->get('button_continue');
+			$data['button_back'] = $this->language->get('button_back');
 
 			if (isset($this->session->data['error'])) {
 				$data['error_warning'] = $this->session->data['error'];
@@ -366,6 +366,7 @@ class ControllerAccountOrder extends Controller {
 			}
 
 			$data['continue'] = $this->url->link('account/order', '', true);
+			$data['back'] = $this->url->link('account/account', '', true);
 
 			$data['column_left'] = $this->load->controller('common/column_left');
 			$data['column_right'] = $this->load->controller('common/column_right');
@@ -406,7 +407,7 @@ class ControllerAccountOrder extends Controller {
 				'href' => $this->url->link('account/order/info', 'order_id=' . $order_id, true)
 			);
 
-			$data['continue'] = $this->url->link('account/order', '', true);
+			$data['back'] = $this->url->link('account/order', '', true);
 
 			$data['column_left'] = $this->load->controller('common/column_left');
 			$data['column_right'] = $this->load->controller('common/column_right');

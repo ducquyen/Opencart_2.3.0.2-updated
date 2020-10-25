@@ -39,7 +39,7 @@ class ControllerAccountReward extends Controller {
 		$data['text_total'] = $this->language->get('text_total');
 		$data['text_empty'] = $this->language->get('text_empty');
 
-		$data['button_continue'] = $this->language->get('button_continue');
+		$data['button_back'] = $this->language->get('button_back');
 
 		if (isset($this->request->get['page'])) {
 			$page = (int)$this->request->get['page'];
@@ -82,7 +82,7 @@ class ControllerAccountReward extends Controller {
 
 		$data['total'] = (int)$this->customer->getRewardPoints();
 
-		$data['continue'] = $this->url->link('account/account', '', true);
+		$data['back'] = $this->url->link('account/account', '', true);
 
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['column_right'] = $this->load->controller('common/column_right');
