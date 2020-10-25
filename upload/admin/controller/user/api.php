@@ -424,6 +424,10 @@ class ControllerUserApi extends Controller {
 			$this->error['key'] = $this->language->get('error_key');
 		}
 
+		if (!isset($this->error['warning']) && !isset($this->request->post['api_ip'])) {
+			$this->error['warning'] = $this->language->get('error_ip');
+		}
+
 		return !$this->error;
 	}
 
