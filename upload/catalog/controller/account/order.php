@@ -103,7 +103,7 @@ class ControllerAccountOrder extends Controller {
 		$this->load->language('account/order');
 
 		if (isset($this->request->get['order_id'])) {
-			$order_id = $this->request->get['order_id'];
+			$order_id = (int)$this->request->get['order_id'];
 		} else {
 			$order_id = 0;
 		}
@@ -365,8 +365,7 @@ class ControllerAccountOrder extends Controller {
 				);
 			}
 
-			$data['continue'] = $this->url->link('account/order', '', true);
-			$data['back'] = $this->url->link('account/account', '', true);
+			$data['back'] = $this->url->link('account/order', '', true);
 
 			$data['column_left'] = $this->load->controller('common/column_left');
 			$data['column_right'] = $this->load->controller('common/column_right');
